@@ -11,7 +11,7 @@
 
                 <div class="row mb-4">
                     <div class="col mb-3">
-                        <button type="button" class="btn btn-primary mt-2 mr-2"><a href="{{ route('users.create') }}" style="color: white">Tambah Data User</a></button>
+                        <button type="button" class="btn btn-primary mt-2 mr-2"><a href="{{ route('admin.users.create') }}" style="color: white">Tambah Data User</a></button>
                         <button type="button" class="btn btn-primary mt-2 mr-2" data-toggle="modal" data-target="#users-import">
                             Import
                         </button>
@@ -34,7 +34,7 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Email</th>
-                            <th>Role</th>
+                            {{-- <th>Role</th> --}}
                             <th>Action</th>
                         </tr>
                     </thead>

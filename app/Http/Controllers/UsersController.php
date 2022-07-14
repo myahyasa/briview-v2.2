@@ -31,13 +31,13 @@ class UsersController extends Controller
                 'name' => 'required|max:50',
                 'email' => 'required|email:dns',
                 'password' => 'required|min:5|max:255',
-                'role_id' => 'required',
+                // 'role_id' => 'required',
             ],
             [
                 'name.required' => 'Nama harus diisi',
                 'email.required' => 'Email harus diisi',
                 'password.required' => 'Password harus diisi',
-                'role_id.required' => 'Roles harus diisi',
+                // 'role_id.required' => 'Roles harus diisi',
             ],
         );
 
@@ -51,7 +51,7 @@ class UsersController extends Controller
 
         User::create($validatedData);
 
-        return redirect()->route('users.index')->with('success', 'User baru berhasil dibuat.');
+        return redirect()->route('admin.users.index')->with('success', 'User baru berhasil dibuat.');
     }
 
     public function edit(){

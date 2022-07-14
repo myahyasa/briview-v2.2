@@ -29,12 +29,14 @@ Route::get('/', function () {
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth'])->name('home.index');
 
 Route::group([], function(){
+    
     Route::get('/login', [LoginController::class, 'index'])->middleware(['guest'])->name('login.index');
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->group(function(){
+
     Route::get('/users/getData', [UsersController::class, 'getData'])->name('users.getData');
     Route::get('/users/index', [UsersController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UsersController::class, 'create'])->name('users.create');

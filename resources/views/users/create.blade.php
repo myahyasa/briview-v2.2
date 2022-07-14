@@ -3,7 +3,7 @@
 <div class="layout-px-spacing">
     <div class="row layout-top-spacing">
         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-            <form action="{{ route('users.post') }}" id="form-tambah-data-users" method="POST">
+            <form action="{{ route('admin.users.post') }}" id="form-tambah-data-users" method="POST">
                 @csrf
                 <div class="widget-content widget-content-area">
                     <h4 class="text-primary mb-4">Tambah Data Users</h4>
@@ -35,27 +35,27 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group row mb-4">
+                    {{-- <div class="form-group row mb-4">
                         <label for="role_id" class="col-sm-2 col-form-label text-black">Roles <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
                             <input type="number" class="form-control input1 @error('role_id') is-invalid @enderror" name="role_id" id="role_id_users" placeholder="Roles">
                             @if ($errors->has('role_id'))
                             <span class="text-danger">{{ $errors->first('role_id') }}</span>
-                            @endif
-                        </div>
-                    </div>
-                    <hr class="mb-4">
-                    <div class="row">
-                        <div class="col-md-10"></div>
-                        <div class="col-md-2">
-                            <a class="btn btn-warning" href="{{ route('users.index') }}">Batal</a>
-                            <input class="btn btn-success" type="submit" id="submit-tambah-data-users" value="Simpan">
-                        </div>
-                    </div>
+                    @endif
                 </div>
-            </form>
+        </div> --}}
+        <hr class="mb-4">
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+                <a class="btn btn-warning" href="{{ route('admin.users.index') }}">Batal</a>
+                <input class="btn btn-success" type="submit" id="submit-tambah-data-users" value="Simpan">
+            </div>
         </div>
     </div>
+    </form>
+</div>
+</div>
 </div>
 
 @endsection
