@@ -848,6 +848,34 @@ $("#admin_ambilDataPermissions").select2({
 });
 $('#admin_ambilDataPermissions').css('font-weight', 'bold');
 
+// ambil data roles di permissions
+$("#admin_ambilDataRoles").select2({
+    language: {
+        noResults: function (params) {
+            return "Data tidak ditemukan.";
+        }
+    },
+    ajax: {
+        url: "http://localhost:8000/admin/permissions/ambilDataRoles",
+        type: 'POST',
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+            return {
+                _token: CSRF_TOKEN,
+                search: params.term
+            }
+        },
+        processResults: function (response) {
+            return response;
+        },
+        cache: true
+
+    },
+
+});
+$('#admin_ambilDataRoles').css('font-weight', 'bold');
+
 
 
 

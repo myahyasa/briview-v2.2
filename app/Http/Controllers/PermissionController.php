@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
 class PermissionController extends Controller
@@ -82,6 +83,63 @@ class PermissionController extends Controller
         Permission::where('id',$id)->delete();
 
         return redirect()->route('admin.permissions.index')->with('success', 'Data permission berhasil dihapus.');
+
+    }
+
+    public function removeRoles(Permission $permission, Role $role) {
+
+        if($permission->hasRole($role)) {
+            $permission->removeRole($role);
+            return back()->with('success', 'Role dihapus');
+        }
+        return back()->with('success', 'Role tidak ditemukan');
+
+    }
+
+    public function assignRoles(Request $request, Permission $permission){
+
+        $validatedData = $request->validate(
+            [
+                'role' => 'required',
+            ],
+            [
+                'role.required' => 'Role tidak boleh kosong. Silahkan pilih salah satu role.',
+            ],
+        );
+
+        if($permission->hasRole($request->role)){
+            return back()->with('success', 'Role sudah terpasang');
+        }
+        $permission->assignRole($request->role);
+        return back()->with('success', 'Role ditambahkan');
+
+    }
+
+    public function ambilDataRoles(Request $request) {
+
+        $search = $request->search;
+        if($search == ''){
+            $data = Role::orderby('name','asc')
+                                    ->select('id','name')
+                                    ->limit(5)
+                                    ->get();
+        } else {
+            $data = Role::orderby('name','asc')
+                                    ->select('id','name')
+                                    ->where('name','like','%'.$search.'%')
+                                    ->limit(5)
+                                    ->get();
+        }
+
+        $response = (object)array("results"=>[]);
+        foreach($data as $row){
+            $response->results[] = array(
+                'id' => $row->name, 
+                'text' => $row->name
+            );
+        }
+
+        return response()->json($response);
 
     }
 

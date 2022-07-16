@@ -93,11 +93,18 @@ class RoleController extends Controller
         }
         return back()->with('success', 'Permission tidak ditemukan');
 
-
-
     }
 
     public function assignPermissions(Request $request, Role $role){
+
+        $validatedData = $request->validate(
+            [
+                'permissions' => 'required',
+            ],
+            [
+                'permissions.required' => 'Permission tidak boleh kosong. Silahkan pilih salah satu permission.',
+            ],
+        );
 
         if($role->hasPermissionTo($request->permissions)){
             return back()->with('success', 'Permission sudah terpasang');

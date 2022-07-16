@@ -65,4 +65,7 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
     Route::get('/permissions/edit/{id}', [PermissionController::class, 'edit'])->name('permissions.edit');
     Route::get('/permissions/delete/{id}', [PermissionController::class, 'delete'])->name('permissions.delete');
     Route::post('/permissions/update/{id}', [PermissionController::class, 'update'])->name('permissions.update');
+    Route::post('/permissions/ambilDataRoles', [PermissionController::class, 'ambilDataRoles'])->name('permissions.ambilDataRoles');
+    Route::post('/permissions/{permission}/roles', [PermissionController::class, 'assignRoles'])->name('permissions.assignRoles');
+    Route::get('/permissions/{permission}/roles/{role}', [PermissionController::class, 'removeRoles'])->name('permissions.removeRoles');
 });
