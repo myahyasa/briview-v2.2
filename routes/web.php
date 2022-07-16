@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +43,26 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
     Route::get('/users/index', [UsersController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UsersController::class, 'create'])->name('users.create');
     Route::post('/users/post', [UsersController::class, 'post'])->name('users.post');
-    Route::get('/users/edit', [UsersController::class, 'edit'])->name('users.edit');
+    Route::get('/users/edit/{id}', [UsersController::class, 'edit'])->name('users.edit');
     Route::get('/users/delete/{id}', [UsersController::class, 'delete'])->name('users.delete');
     Route::post('/users/update/{id}', [UsersController::class, 'update'])->name('users.update');
+
+    Route::get('/roles/getData', [RoleController::class, 'getData'])->name('roles.getData');
+    Route::get('/roles/index', [RoleController::class, 'index'])->name('roles.index');
+    Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
+    Route::post('/roles/post', [RoleController::class, 'post'])->name('roles.post');
+    Route::get('/roles/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit');
+    Route::get('/roles/delete/{id}', [RoleController::class, 'delete'])->name('roles.delete');
+    Route::post('/roles/update/{id}', [RoleController::class, 'update'])->name('roles.update');
+    Route::post('/roles/ambilDataPermissions', [RoleController::class, 'ambilDataPermissions'])->name('roles.ambilDataPermissions');
+    Route::post('/roles/assignPermissions/{role}', [RoleController::class, 'assignPermissions'])->name('roles.assignPermissions');
+    Route::get('/roles/{role}/permissions/{permission}', [RoleController::class, 'revokePermission'])->name('roles.revokePermission');
+
+    Route::get('/permissions/getData', [PermissionController::class, 'getData'])->name('permissions.getData');
+    Route::get('/permissions/index', [PermissionController::class, 'index'])->name('permissions.index');
+    Route::get('/permissions/create', [PermissionController::class, 'create'])->name('permissions.create');
+    Route::post('/permissions/post', [PermissionController::class, 'post'])->name('permissions.post');
+    Route::get('/permissions/edit/{id}', [PermissionController::class, 'edit'])->name('permissions.edit');
+    Route::get('/permissions/delete/{id}', [PermissionController::class, 'delete'])->name('permissions.delete');
+    Route::post('/permissions/update/{id}', [PermissionController::class, 'update'])->name('permissions.update');
 });

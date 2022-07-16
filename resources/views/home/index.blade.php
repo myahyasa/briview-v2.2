@@ -4,7 +4,7 @@
 <div class="layout-px-spacing">
 
     <div class="row layout-top-spacing">
-        <h2>Selamat Datang,</h2>
+        <h2>Anda telah login, {{ Auth::user()->name }}</h2>
 
     </div>
 

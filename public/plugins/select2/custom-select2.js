@@ -820,6 +820,35 @@ $("#target_performance_ambilDataUker").select2({
 });
 $('#target_performance_ambilDataUker').css('font-weight', 'bold');
 
+// ambil data permissions di role
+$("#admin_ambilDataPermissions").select2({
+    language: {
+        noResults: function (params) {
+            return "Data tidak ditemukan.";
+        }
+    },
+    ajax: {
+        url: "http://localhost:8000/admin/roles/ambilDataPermissions",
+        type: 'POST',
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+            return {
+                _token: CSRF_TOKEN,
+                search: params.term
+            }
+        },
+        processResults: function (response) {
+            return response;
+        },
+        cache: true
+
+    },
+
+});
+$('#admin_ambilDataPermissions').css('font-weight', 'bold');
+
+
 
 
 
