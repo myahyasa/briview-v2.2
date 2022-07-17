@@ -844,11 +844,13 @@ $("#admin_ambilDataPermissions").select2({
         cache: true
 
     },
+    // hiddem search box
+    // minimumResultsForSearch: 20
 
 });
 $('#admin_ambilDataPermissions').css('font-weight', 'bold');
 
-// ambil data roles di permissions
+// ambil data roles di permissions & users
 $("#admin_ambilDataRoles").select2({
     language: {
         noResults: function (params) {
@@ -860,6 +862,7 @@ $("#admin_ambilDataRoles").select2({
         type: 'POST',
         dataType: 'json',
         delay: 250,
+        minimumResultsForSearch: 20,
         data: function (params) {
             return {
                 _token: CSRF_TOKEN,

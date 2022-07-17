@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\MasterVendorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,8 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
     Route::get('/users/edit/{id}', [UsersController::class, 'edit'])->name('users.edit');
     Route::get('/users/delete/{id}', [UsersController::class, 'delete'])->name('users.delete');
     Route::post('/users/update/{id}', [UsersController::class, 'update'])->name('users.update');
+    Route::post('/users/assignRoles/{user}', [UsersController::class, 'assignRoles'])->name('users.assignRoles');
+    Route::get('/users/{user}/removeRoles/{role}', [UsersController::class, 'removeRoles'])->name('users.removeRoles');
 
     Route::get('/roles/getData', [RoleController::class, 'getData'])->name('roles.getData');
     Route::get('/roles/index', [RoleController::class, 'index'])->name('roles.index');
@@ -68,4 +71,27 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
     Route::post('/permissions/ambilDataRoles', [PermissionController::class, 'ambilDataRoles'])->name('permissions.ambilDataRoles');
     Route::post('/permissions/{permission}/roles', [PermissionController::class, 'assignRoles'])->name('permissions.assignRoles');
     Route::get('/permissions/{permission}/roles/{role}', [PermissionController::class, 'removeRoles'])->name('permissions.removeRoles');
+});
+
+// masteVendor
+Route::middleware(['auth', 'permission:masterVendor.getData'])->group(function(){
+    Route::get('/masterVendor/getData', [MasterVendorController::class, 'getData'])->name('masterVendor.getData');
+});
+Route::middleware(['auth', 'permission:masterVendor.index'])->group(function(){
+    Route::get('/masterVendor/index', [MasterVendorController::class, 'index'])->name('masterVendor.index');
+});
+Route::middleware(['auth', 'permission:masterVendor.create'])->group(function(){
+    Route::get('/masterVendor/create', [MasterVendorController::class, 'create'])->name('masterVendor.create');
+});
+Route::middleware(['auth', 'permission:masterVendor.post'])->group(function(){
+    Route::post('/masterVendor/post', [MasterVendorController::class, 'post'])->name('masterVendor.post');
+});
+Route::middleware(['auth', 'permission:masterVendor.edit'])->group(function(){
+    Route::get('/masterVendor/edit/{id}', [MasterVendorController::class, 'edit'])->name('masterVendor.edit');
+});
+Route::middleware(['auth', 'permission:masterVendor.delete'])->group(function(){
+    Route::get('/masterVendor/delete/{id}', [MasterVendorController::class, 'delete'])->name('masterVendor.delete');
+});
+Route::middleware(['auth', 'permission:masterVendor.update'])->group(function(){
+    Route::post('/masterVendor/update/{id}', [MasterVendorController::class, 'update'])->name('masterVendor.update');
 });

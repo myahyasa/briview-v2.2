@@ -18,11 +18,11 @@
                         </div>
                     </div>
                     <div class="form-group row mb-4">
-                        <label for="email" class="col-sm-2 col-form-label text-black">Email <span style="color: red;">*</span></label>
+                        <label for="username" class="col-sm-2 col-form-label text-black">Username <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control input1 @error('email') is-invalid @enderror" name="email" id="email_users" placeholder="Email User" value="{{ old('email') }}">
-                            @if ($errors->has('email'))
-                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                            <input type="text" class="form-control input1 @error('username') is-invalid @enderror" name="username" id="username" placeholder="Username" value="{{ old('username') }}">
+                            @if ($errors->has('username'))
+                            <span class="text-danger">{{ $errors->first('username') }}</span>
                             @endif
                         </div>
                     </div>
@@ -32,6 +32,51 @@
                             <input type="password" class="form-control input1 @error('password') is-invalid @enderror" name="password" id="password_users" placeholder="Password User">
                             @if ($errors->has('password'))
                             <span class="text-danger">{{ $errors->first('password') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="nik" class="col-sm-2 col-form-label text-black">NIK <span style="color: red;">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control input1 @error('nik') is-invalid @enderror" name="nik" id="nik" placeholder="nik" value="{{ old('nik') }}">
+                            @if ($errors->has('nik'))
+                            <span class="text-danger">{{ $errors->first('nik') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="unit_kerja" class="col-sm-2 col-form-label text-black">Unit Kerja <span style="color: red;">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control input1 @error('unit_kerja') is-invalid @enderror" name="unit_kerja" id="unit_kerja" placeholder="unit kerja" value="{{ old('unit_kerja') }}">
+                            @if ($errors->has('unit_kerja'))
+                            <span class="text-danger">{{ $errors->first('unit_kerja') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="project" class="col-sm-2 col-form-label text-black">Project <span style="color: red;">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control input1 @error('project') is-invalid @enderror" name="project" id="project" placeholder="project" value="{{ old('project') }}">
+                            @if ($errors->has('project'))
+                            <span class="text-danger">{{ $errors->first('project') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="jabatan" class="col-sm-2 col-form-label text-black">Jabatan <span style="color: red;">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control input1 @error('jabatan') is-invalid @enderror" name="jabatan" id="jabatan" placeholder="jabatan" value="{{ old('jabatan') }}">
+                            @if ($errors->has('jabatan'))
+                            <span class="text-danger">{{ $errors->first('jabatan') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="no_telp" class="col-sm-2 col-form-label text-black">No Telepon <span style="color: red;">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control input1 @error('no_telp') is-invalid @enderror" name="no_telp" id="no_telp" placeholder="no telepon" value="{{ old('no_telp') }}">
+                            @if ($errors->has('no_telp'))
+                            <span class="text-danger">{{ $errors->first('no_telp') }}</span>
                             @endif
                         </div>
                     </div>

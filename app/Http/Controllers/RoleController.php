@@ -12,7 +12,8 @@ class RoleController extends Controller
     
     public function getData(Request $request) {
 
-        return DataTables::of(Role::whereNotIn('name', ['admin'])->get())->toJson();
+        // return DataTables::of(Role::whereNotIn('name', ['admin'])->get())->toJson();
+        return DataTables::of(Role::get())->toJson();
 
     }
     
