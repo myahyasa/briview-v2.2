@@ -2,30 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MasterKcSupervisi;
+use App\Models\MasterUker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
-class MasterKcSupervisiController extends Controller
+class MasterUkerController extends Controller
 {
     public function getData() {
 
-        $kcData = MasterKcSupervisi::where('is_deleted',0)->get();
+        $ukerData = MasterUker::where('is_deleted',0)->get();
 
-        return datatables::of($kcData)->toJson();
+        return datatables::of($ukerData)->toJson();
 
     }
 
     public function index() {
 
-        return view('master_kc_supervisi.index');
+        return view('master_uker.index');
 
     }
 
     public function create() {
 
-        return view('master_kc_supervisi.create');
+        return view('master_uker.create');
 
     }
 
@@ -33,36 +33,38 @@ class MasterKcSupervisiController extends Controller
 
         $validatedData = $request->validate([
 
-                'branchcode_kc_supervisi' => 'required',
-                'kc_supervisi' => 'required',
+                'branchcode_uker' => 'required',
+                'uker' => 'required',
+                'jenis_uker' => 'required',
                 'effective_date' => 'required',
 
             ],
             [
-                'branchcode_kc_supervisi.required' => 'Branchcode kc supervisi harus diisi',
-                'kc_supervisi.required' => 'kc supervisi harus diisi',
+                'branchcode_uker.required' => 'Branchcode uker harus diisi',
+                'uker.required' => 'Uker harus diisi',
+                'jenis_uker.required' => 'Jenis uker harus diisi',
                 'effective_date.required' => 'Effective date harus diisi',
             ],
     
         );
 
-        MasterKcSupervisi::insert([
+        MasterUker::insert([
 
-            'branchcode_kc_supervisi' => $request->branchcode_kc_supervisi,
-            'kc_supervisi' => $request->kc_supervisi,
+            'branchcode_uker' => $request->branchcode_uker,
+            'uker' => $request->uker,
             'effective_date' => $request->effective_date,
 
         ]);
 
-        return redirect()->route('masterKcSupervisi.index')->with('success', 'Master kc supervisi berhasil dibuat.');
+        return redirect()->route('masterUker.index')->with('success', 'Master uker berhasil dibuat.');
 
     }
 
     public function edit($id) {
 
-        $masterKanwil_edit = MasterKcSupervisi::where('id',$id)->first();
+        $masterUker_edit = MasterUker::where('id',$id)->first();
 
-        return view('master_kc_supervisi.edit', compact('masterKcSupervisi_edit'));
+        return view('master_uker.edit', compact('masterUker_edit'));
 
     }
 
@@ -71,15 +73,17 @@ class MasterKcSupervisiController extends Controller
         $validatedData = $request->validate(
             [
 
-                'branchcode_kc_supervisi' => 'required',
-                'kc_supervisi' => 'required',
+                'branchcode_uker' => 'required',
+                'uker' => 'required',
+                'jenis_uker' => 'required',
                 'effective_date' => 'required',
                 'remarks' => 'required',
 
             ],
             [
-                'branchcode_kc_supervisi.required' => 'Branchcode kc supervisi harus diisi',
-                'kc_supervisi.required' => 'Kc supervisi harus diisi',
+                'branchcode_uker.required' => 'Branchcode uker harus diisi',
+                'uker.required' => 'Uker harus diisi',
+                'jenis_uker.required' => 'Jenis uker harus diisi',
                 'effective_date.required' => 'Effective date harus diisi',
                 'remarks.required' => 'Remarks harus diisi',
             ],
@@ -87,35 +91,35 @@ class MasterKcSupervisiController extends Controller
         );
 
         $expire_date = date("Y-m-d");
-        MasterKcSupervisi::where('id',$id)
+        MasterUker::where('id',$id)
                         ->update([
                             'is_deleted' => 1,
                             'expire_date' => $expire_date,
                             'remarks' => $request->remarks
                         ]);
 
-        MasterKcSupervisi::insert([
-            'branchcode_kc_supervisi' => $request->branchcode_kc_supervisi,
-            'kc_supervisi' => $request->kc_supervisi,
+        MasterUker::insert([
+            'branchcode_uker' => $request->branchcode_uker,
+            'uekr' => $request->uekr,
             'effective_date' => $request->effective_date,
             'remarks' => $request->remarks,
             'updated_at' => now(),
         ]);
 
-        return redirect()->route('masterKcSupervisi.index')->with('success', 'Master kc supervisi berhasil diupdate');
+        return redirect()->route('masterUker.index')->with('success', 'Master uker berhasil diupdate');
 
     }
 
     public function delete($id) {
 
         $expire_date = date("Y-m-d");
-        MasterKcSupervisi::where('id',$id)
+        MasterUker::where('id',$id)
                         ->update([
                             'is_deleted'=>1,
                             'expire_date'=>$expire_date
                         ]);
 
-        return redirect()->route('masterKcSupervisi.index')->with('success', 'Master kc supervisi berhasil dihapus');
+        return redirect()->route('masterUker.index')->with('success', 'Master uker berhasil dihapus');
 
     }
     

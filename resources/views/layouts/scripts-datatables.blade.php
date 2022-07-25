@@ -327,3 +327,60 @@
 
 </script>
 {{-- ===============================================================END SCRIPT MASTER KC SUPERVISI=============================================================== --}}
+
+{{-- ===============================================================SCRIPT MASTER UKER=============================================================== --}}
+<script>
+    $(function () {
+        $('#masterUker-table').DataTable({
+            processing: true,
+            serverSide: true,
+            searchable: true,
+            scrollY: 500,
+            scrollX: true,
+            // scrollCollapse: true,
+            "order": [
+                [1, "asc"]
+            ],
+            "pagingType": "full_numbers",
+            paging: true,
+            pageLength: 50,
+            ajax: {
+                "async": "true",
+                "url": "{{ route('masterUker.getData') }}",
+                "dataType": "json"
+            },
+            columns: [{
+                    "data": null,
+                    "class": "align-top",
+                    "orderable": false,
+                    "searchable": false,
+                    "render": function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    data: 'branchcode_uker',
+                    name: 'branchcode_uker'
+                },
+                {
+                    data: 'uker',
+                    name: 'uker'
+                },
+                {
+                    data: 'jenis_uker',
+                    name: 'jenis_uker'
+                },
+            ],
+            columnDefs: [{
+                "targets": 4,
+                "render": function (data, type, row, meta) {
+                    return `<a class="btn bg-transparent" href="{{ url('/masterUker/edit/${row.id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit</a> |
+            <a class="btn bg-transparent" href="{{ url('/masterUker/delete/${row.id}') }}" onclick="return confirm('Yakin ingin menghapus data: ${row.uker} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
+                }
+            }],
+
+        });
+    });
+
+</script>
+{{-- ===============================================================END SCRIPT MASTER UKER=============================================================== --}}

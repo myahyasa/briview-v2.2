@@ -49,6 +49,24 @@
 </script>
 {{-- ===============================================================END SCRIPT MASTER KC SUPERVISI=============================================================== --}}
 
+{{-- ===============================================================SCRIPT MASTER UKER=============================================================== --}}
+<script>
+    var form_tambah_data_uker = document.getElementById('form-tambah-data-master-uker');
+    var submit_tambah_data_master_uker = document.getElementById('submit-tambah-data-master-uker');
+
+    form_tambah_data_uker.addEventListener('submit', function () {
+
+        submit_tambah_data_master_uker.setAttribute('disabled', 'disabled');
+
+        submit_tambah_data_master_uker.value = 'Tunggu...';
+
+
+    }, false);
+
+</script>
+{{-- ===============================================================END SCRIPT MASTER UKER=============================================================== --}}
+
+
 {{-- ===============================================================SCRIPT MACHINE INFO=============================================================== --}}
 <script>
     var form_tambah_data_machine_info = document.getElementById('form-tambah-data-machine-info');
