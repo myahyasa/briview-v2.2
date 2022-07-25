@@ -126,7 +126,7 @@
             {{-- BEGIN MASTER CRM --}}
             <li class="menu">
                 <a href="#components" data-toggle="collapse"
-                    aria-expanded="{{ request()->segment(1)=='machineInfo'||request()->segment(1)=='tid_allocation'||request()->segment(1)=='digital_signage'||request()->segment(1)=='cctv'||request()->segment(1)=='ups'||request()->segment(1)=='nvr'||request()->segment(1)=='cro_allocation'||request()->segment(1)=='master_unit_kerja'||request()->segment(1)=='detail_parameter_tid'||request()->segment(1)=='master_lokasi' ? 'true' : '';  }}"
+                    aria-expanded="{{ request()->segment(1)=='machineInfo'||request()->segment(1)=='tid_allocation'||request()->segment(1)=='digitalSignage'||request()->segment(1)=='cctv'||request()->segment(1)=='ups'||request()->segment(1)=='nvr'||request()->segment(1)=='cro_allocation'||request()->segment(1)=='master_unit_kerja'||request()->segment(1)=='detail_parameter_tid'||request()->segment(1)=='master_lokasi' ? 'true' : '';  }}"
                     class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box">
@@ -143,7 +143,7 @@
                         </svg>
                     </div>
                 </a>
-                <ul class="collapse submenu list-unstyled {{ request()->segment(1)=='machineInfo'||request()->segment(1)=='tid_allocation'||request()->segment(1)=='digital_signage'||request()->segment(1)=='cctv'||request()->segment(1)=='ups'||request()->segment(1)=='nvr'||request()->segment(1)=='cro_allocation'||request()->segment(1)=='master_unit_kerja'||request()->segment(1)=='detail_parameter_tid'||request()->segment(1)=='master_lokasi' ? 'show' : 'hidden';  }}"
+                <ul class="collapse submenu list-unstyled {{ request()->segment(1)=='machineInfo'||request()->segment(1)=='tid_allocation'||request()->segment(1)=='digitalSignage'||request()->segment(1)=='cctv'||request()->segment(1)=='ups'||request()->segment(1)=='nvr'||request()->segment(1)=='cro_allocation'||request()->segment(1)=='master_unit_kerja'||request()->segment(1)=='detail_parameter_tid'||request()->segment(1)=='master_lokasi' ? 'show' : 'hidden';  }}"
                     id="components" data-parent="#accordionExample">
                     <li class="{{ request()->segment(1) == 'machineInfo' ? 'active' : '';  }}">
                         <a href="{{ route('machineInfo.index') }}"> Machine Info </a>
@@ -151,8 +151,8 @@
                     <li class="{{ request()->segment(1) == 'tid_allocation' ? 'active' : '';  }}">
                         <a href=""> TID Allocation </a>
                     </li>
-                    <li class="{{ request()->segment(1) == 'digital_signage' ? 'active' : '';  }}">
-                        <a href=""> Digital Signage </a>
+                    <li class="{{ request()->segment(1) == 'digitalSignage' ? 'active' : '';  }}">
+                        <a href="{{ route('digitalSignage.index') }}"> Digital Signage </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'cctv' ? 'active' : '';  }}">
                         <a href=""> CCTV </a>

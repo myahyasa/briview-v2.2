@@ -2,33 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MachineInfo;
+use App\Models\DigitalSignage;
 use App\Models\MasterVendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
-class MachineInfoController extends Controller
+class DigitalSignageController extends Controller
 {
     public function getData() {
 
-        $machineInfoData = MachineInfo::join('tb_master_vendor', 'tb_master_vendor.id', '=', 'tb_machine_info.tb_master_vendor_id')
-                                    ->select('*', 'tb_machine_info.id as machine_info_id')
-                                    ->where('tb_machine_info.is_deleted',0)->get();
+        $digitalSignageData = DigitalSignage::join('tb_master_vendor', 'tb_master_vendor.id', '=', 'tb_digital_signage.tb_master_vendor_id')
+                                    ->select('*', 'tb_digital_signage.id as digital_signage_id')
+                                    ->where('tb_digital_signage.is_deleted',0)->get();
 
-        return datatables::of($machineInfoData)->toJson();
+        return datatables::of($digitalSignageData)->toJson();
 
     }
 
     public function index() {
 
-        return view('machine_info.index');
+        return view('digital_signage.index');
 
     }
 
     public function create() {
 
-        return view('machine_info.create');
+        return view('digital_signage.create');
 
     }
 
@@ -36,9 +36,9 @@ class MachineInfoController extends Controller
 
         $validatedData = $request->validate([
 
-                'brand' => 'required',
                 'vendor_name' => 'required',
-                'sn_machine' => 'required',
+                'brand' => 'required',
+                'sn_digital_signage' => 'required',
                 'type' => 'required',
                 'no_spk' => 'required',
                 'project_name' => 'required',
@@ -47,10 +47,10 @@ class MachineInfoController extends Controller
 
             ],
             [
-                'brand.required' => 'Brand harus diisi',
                 'vendor_name.required' => 'Nama vendor harus diisi',
-                'sn_machine.required' => 'SN mesin harus diisi',
-                'type.required' => 'Tipe harus diisi',
+                'brand.required' => 'Brand harus diisi',
+                'sn_digital_signage.required' => 'Sn digital signage harus diisi',
+                'type.required' => 'Type harus diisi',
                 'no_spk.required' => 'No spk harus diisi',
                 'project_name.required' => 'Nama projek harus diisi',
                 'year.required' => 'Tahun harus diisi',
@@ -59,11 +59,11 @@ class MachineInfoController extends Controller
     
         );
 
-        MachineInfo::insert([
+        DigitalSignage::insert([
 
-            'brand' => $request->brand,
             'tb_master_vendor_id' => explode('|', $request->vendor_name)[0],
-            'sn_machine' => $request->sn_machine,
+            'brand' => $request->brand,
+            'sn_digital_signage' => $request->sn_digital_signage,
             'type' => $request->type,
             'no_spk' => $request->no_spk,
             'project_name' => $request->project_name,
@@ -72,17 +72,17 @@ class MachineInfoController extends Controller
 
         ]);
 
-        return redirect()->route('machineInfo.index')->with('success', 'Machine info berhasil dibuat.');
+        return redirect()->route('digitalSignage.index')->with('success', 'Digital Signage berhasil dibuat.');
 
     }
 
     public function edit($id) {
 
-        $machineInfo_edit = MachineInfo::join('tb_master_vendor', 'tb_master_vendor.id', '=', 'tb_machine_info.tb_master_vendor_id')
-                                    ->select('*', 'tb_machine_info.id as machine_info_id')
-                                    ->where('tb_machine_info.id',$id)->first();
+        $digitalSignage_edit = DigitalSignage::join('tb_master_vendor', 'tb_master_vendor.id', '=', 'tb_digital_signage.tb_master_vendor_id')
+                                    ->select('*', 'tb_digital_signage.id as digital_signage_id')
+                                    ->where('tb_digital_signage.id',$id)->first();
 
-        return view('machine_info.edit', compact('machineInfo_edit'));
+        return view('digital_signage.edit', compact('digitalSignage_edit'));
 
     }
 
@@ -91,9 +91,9 @@ class MachineInfoController extends Controller
         $validatedData = $request->validate(
             [
 
-                'brand' => 'required',
                 'vendor_name' => 'required',
-                'sn_machine' => 'required',
+                'brand' => 'required',
+                'sn_digital_signage' => 'required',
                 'type' => 'required',
                 'no_spk' => 'required',
                 'project_name' => 'required',
@@ -103,10 +103,10 @@ class MachineInfoController extends Controller
 
             ],
             [
-                'brand.required' => 'Brand harus diisi',
                 'vendor_name.required' => 'Nama vendor harus diisi',
-                'sn_machine.required' => 'SN mesin harus diisi',
-                'type.required' => 'Tipe harus diisi',
+                'brand.required' => 'Brand harus diisi',
+                'sn_digital_signage.required' => 'Sn digital signage harus diisi',
+                'type.required' => 'Type harus diisi',
                 'no_spk.required' => 'No spk harus diisi',
                 'project_name.required' => 'Nama projek harus diisi',
                 'year.required' => 'Tahun harus diisi',
@@ -117,17 +117,17 @@ class MachineInfoController extends Controller
         );
 
         $expire_date = date("Y-m-d");
-        MachineInfo::where('id',$id)
+        DigitalSignage::where('id',$id)
                         ->update([
                             'is_deleted' => 1,
                             'expire_date' => $expire_date,
                             'remarks' => $request->remarks
                         ]);
 
-        MachineInfo::insert([
-            'brand' => $request->brand,
+        DigitalSignage::insert([
             'tb_master_vendor_id' => explode('|', $request->vendor_name)[0],
-            'sn_machine' => $request->sn_machine,
+            'brand' => $request->brand,
+            'sn_digital_signage' => $request->sn_digital_signage,
             'type' => $request->type,
             'no_spk' => $request->no_spk,
             'project_name' => $request->project_name,
@@ -137,20 +137,20 @@ class MachineInfoController extends Controller
             'updated_at' => now(),
         ]);
 
-        return redirect()->route('machineInfo.index')->with('success', 'Machine info berhasil diupdate');
+        return redirect()->route('digitalSignage.index')->with('success', 'Digital signage berhasil diupdate');
 
     }
 
     public function delete($id) {
 
         $expire_date = date("Y-m-d");
-        MachineInfo::where('id',$id)
+        DigitalSignage::where('id',$id)
                         ->update([
                             'is_deleted'=>1,
                             'expire_date'=>$expire_date
                         ]);
 
-        return redirect()->route('machineInfo.index')->with('success', 'Machine info berhasil dihapus');
+        return redirect()->route('digitalSignage.index')->with('success', 'Digital signage berhasil dihapus');
 
     }
 

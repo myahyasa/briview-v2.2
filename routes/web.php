@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DigitalSignageController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
@@ -193,4 +194,56 @@ Route::middleware(['auth', 'permission:machineInfo.update'])->group(function(){
 });
 Route::middleware(['auth', 'permission:machineInfo.ambilDataVendor'])->group(function(){
     Route::post('/machineInfo/ambilDataVendor', [MachineInfoController::class, 'ambilDataVendor'])->name('machineInfo.ambilDataVendor');
+});
+
+// tidAllocation
+Route::middleware(['auth', 'permission:tidAllocation.getData'])->group(function(){
+    Route::get('/tidAllocation/getData', [TidAllocationController::class, 'getData'])->name('tidAllocation.getData');
+});
+Route::middleware(['auth', 'permission:tidAllocation.index'])->group(function(){
+    Route::get('/tidAllocation/index', [TidAllocationController::class, 'index'])->name('tidAllocation.index');
+});
+Route::middleware(['auth', 'permission:tidAllocation.create'])->group(function(){
+    Route::get('/tidAllocation/create', [TidAllocationController::class, 'create'])->name('tidAllocation.create');
+});
+Route::middleware(['auth', 'permission:tidAllocation.post'])->group(function(){
+    Route::post('/tidAllocation/post', [TidAllocationController::class, 'post'])->name('tidAllocation.post');
+});
+Route::middleware(['auth', 'permission:tidAllocation.edit'])->group(function(){
+    Route::get('/tidAllocation/edit/{id}', [TidAllocationController::class, 'edit'])->name('tidAllocation.edit');
+});
+Route::middleware(['auth', 'permission:tidAllocation.delete'])->group(function(){
+    Route::get('/tidAllocation/delete/{id}', [TidAllocationController::class, 'delete'])->name('tidAllocation.delete');
+});
+Route::middleware(['auth', 'permission:tidAllocation.update'])->group(function(){
+    Route::post('/tidAllocation/update/{id}', [TidAllocationController::class, 'update'])->name('tidAllocation.update');
+});
+Route::middleware(['auth', 'permission:tidAllocation.ambilDataVendor'])->group(function(){
+    Route::post('/tidAllocation/ambilDataVendor', [TidAllocationController::class, 'ambilDataVendor'])->name('tidAllocation.ambilDataVendor');
+});
+
+// digitalSignage
+Route::middleware(['auth', 'permission:digitalSignage.getData'])->group(function(){
+    Route::get('/digitalSignage/getData', [DigitalSignageController::class, 'getData'])->name('digitalSignage.getData');
+});
+Route::middleware(['auth', 'permission:digitalSignage.index'])->group(function(){
+    Route::get('/digitalSignage/index', [DigitalSignageController::class, 'index'])->name('digitalSignage.index');
+});
+Route::middleware(['auth', 'permission:digitalSignage.create'])->group(function(){
+    Route::get('/digitalSignage/create', [DigitalSignageController::class, 'create'])->name('digitalSignage.create');
+});
+Route::middleware(['auth', 'permission:digitalSignage.post'])->group(function(){
+    Route::post('/digitalSignage/post', [DigitalSignageController::class, 'post'])->name('digitalSignage.post');
+});
+Route::middleware(['auth', 'permission:digitalSignage.edit'])->group(function(){
+    Route::get('/digitalSignage/edit/{id}', [DigitalSignageController::class, 'edit'])->name('digitalSignage.edit');
+});
+Route::middleware(['auth', 'permission:digitalSignage.delete'])->group(function(){
+    Route::get('/digitalSignage/delete/{id}', [DigitalSignageController::class, 'delete'])->name('digitalSignage.delete');
+});
+Route::middleware(['auth', 'permission:digitalSignage.update'])->group(function(){
+    Route::post('/digitalSignage/update/{id}', [DigitalSignageController::class, 'update'])->name('digitalSignage.update');
+});
+Route::middleware(['auth', 'permission:digitalSignage.ambilDataVendor'])->group(function(){
+    Route::post('/digitalSignage/ambilDataVendor', [DigitalSignageController::class, 'ambilDataVendor'])->name('digitalSignage.ambilDataVendor');
 });

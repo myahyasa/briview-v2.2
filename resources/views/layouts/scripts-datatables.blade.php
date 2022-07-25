@@ -447,8 +447,8 @@
             columnDefs: [{
                 "targets": 8,
                 "render": function (data, type, row, meta) {
-                    return `<a class="btn bg-transparent" href="{{ url('/machineInfo/edit/${row.id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit</a> |
-            <a class="btn bg-transparent" href="{{ url('/machineInfo/delete/${row.id}') }}" onclick="return confirm('Yakin ingin menghapus data: ${row.sn_machine} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
+                    return `<a class="btn bg-transparent" href="{{ url('/machineInfo/edit/${row.machine_info_id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit</a> |
+            <a class="btn bg-transparent" href="{{ url('/machineInfo/delete/${row.machine_info_id}') }}" onclick="return confirm('Yakin ingin menghapus data: ${row.sn_machine} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
                 }
             }],
 
@@ -457,3 +457,76 @@
 
 </script>
 {{-- ===============================================================END SCRIPT MACHINE INFO=============================================================== --}}
+
+{{-- ===============================================================SCRIPT DIGITAL SIGNAGE=============================================================== --}}
+<script>
+    $(function () {
+        $('#digitalSignage-table').DataTable({
+            processing: true,
+            serverSide: true,
+            searchable: true,
+            scrollY: 500,
+            scrollX: true,
+            // scrollCollapse: true,
+            "order": [
+                [1, "asc"]
+            ],
+            "pagingType": "full_numbers",
+            paging: true,
+            pageLength: 50,
+            ajax: {
+                "async": "true",
+                "url": "{{ route('digitalSignage.getData') }}",
+                "dataType": "json"
+            },
+            columns: [{
+                    "data": null,
+                    "class": "align-top",
+                    "orderable": false,
+                    "searchable": false,
+                    "render": function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    data: 'vendor_name',
+                    name: 'vendor_name'
+                },
+                {
+                    data: 'brand',
+                    name: 'brand'
+                },
+                {
+                    data: 'sn_digital_signage',
+                    name: 'sn_digital_signage'
+                },
+                {
+                    data: 'type',
+                    name: 'type'
+                },
+                {
+                    data: 'no_spk',
+                    name: 'no_spk'
+                },
+                {
+                    data: 'project_name',
+                    name: 'project_name'
+                },
+                {
+                    data: 'year',
+                    name: 'year'
+                },
+            ],
+            columnDefs: [{
+                "targets": 8,
+                "render": function (data, type, row, meta) {
+                    return `<a class="btn bg-transparent" href="{{ url('/digitalSignage/edit/${row.digital_signage_id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit</a> |
+            <a class="btn bg-transparent" href="{{ url('/digitalSignage/delete/${row.digital_signage_id}') }}" onclick="return confirm('Yakin ingin menghapus data: ${row.sn_digital_signage} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
+                }
+            }],
+
+        });
+    });
+
+</script>
+{{-- ===============================================================END SCRIPT DIGITAL SIGNAGE=============================================================== --}}

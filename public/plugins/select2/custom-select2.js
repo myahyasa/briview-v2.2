@@ -210,7 +210,7 @@ $("#digital_signage_ambilDataVendor").select2({
         }
     },
     ajax: {
-        url: "http://localhost:8000/digital_signage/ambilDataVendor",
+        url: "http://localhost:8000/digitalSignage/ambilDataVendor",
         type: 'POST',
         dataType: 'json',
         delay: 250,
