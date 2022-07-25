@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MachineInfoController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\RoleController;
@@ -166,4 +167,30 @@ Route::middleware(['auth', 'permission:masterUker.delete'])->group(function(){
 });
 Route::middleware(['auth', 'permission:masterUker.update'])->group(function(){
     Route::post('/masterUker/update/{id}', [MasterUkerController::class, 'update'])->name('masterUker.update');
+});
+
+// machineInfo
+Route::middleware(['auth', 'permission:machineInfo.getData'])->group(function(){
+    Route::get('/machineInfo/getData', [MachineInfoController::class, 'getData'])->name('machineInfo.getData');
+});
+Route::middleware(['auth', 'permission:machineInfo.index'])->group(function(){
+    Route::get('/machineInfo/index', [MachineInfoController::class, 'index'])->name('machineInfo.index');
+});
+Route::middleware(['auth', 'permission:machineInfo.create'])->group(function(){
+    Route::get('/machineInfo/create', [MachineInfoController::class, 'create'])->name('machineInfo.create');
+});
+Route::middleware(['auth', 'permission:machineInfo.post'])->group(function(){
+    Route::post('/machineInfo/post', [MachineInfoController::class, 'post'])->name('machineInfo.post');
+});
+Route::middleware(['auth', 'permission:machineInfo.edit'])->group(function(){
+    Route::get('/machineInfo/edit/{id}', [MachineInfoController::class, 'edit'])->name('machineInfo.edit');
+});
+Route::middleware(['auth', 'permission:machineInfo.delete'])->group(function(){
+    Route::get('/machineInfo/delete/{id}', [MachineInfoController::class, 'delete'])->name('machineInfo.delete');
+});
+Route::middleware(['auth', 'permission:machineInfo.update'])->group(function(){
+    Route::post('/machineInfo/update/{id}', [MachineInfoController::class, 'update'])->name('machineInfo.update');
+});
+Route::middleware(['auth', 'permission:machineInfo.ambilDataVendor'])->group(function(){
+    Route::post('/machineInfo/ambilDataVendor', [MachineInfoController::class, 'ambilDataVendor'])->name('machineInfo.ambilDataVendor');
 });
