@@ -27,7 +27,7 @@
                 </div>
                 @endif
 
-                <table class="table table-striped mb-4" id="masterKanwil-table">
+                <table class="table table-striped mb-4" id="masterKcSupervisi-table">
                     <thead>
                         <tr>
                             <th>No</th>

@@ -60,7 +60,7 @@ class MasterKcSupervisiController extends Controller
 
     public function edit($id) {
 
-        $masterKanwil_edit = MasterKcSupervisi::where('id',$id)->first();
+        $masterKcSupervisi_edit = MasterKcSupervisi::where('id',$id)->first();
 
         return view('master_kc_supervisi.edit', compact('masterKcSupervisi_edit'));
 
