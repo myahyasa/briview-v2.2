@@ -113,7 +113,7 @@
                         @if ($users_edit->roles)
                         @foreach ($users_edit->roles as $user_role)
                         <a href="{{ route('admin.users.removeRoles', [$users_edit->id, $user_role->id]) }}" onclick=" return confirm('Yakin ingin menghapus data role: {{ $user_role->name }} ??')">
-                            <span class="badge badge-info">{{ $user_role->name }}</span>
+                            <span class="badge badge-info" style="margin-bottom: 10px">{{ $user_role->name }}</span>
                         </a>
                         @endforeach
                         @endif

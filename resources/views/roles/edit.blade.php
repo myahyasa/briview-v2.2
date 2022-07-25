@@ -46,11 +46,11 @@
                 <hr class="mb-4">
                 <div class="form-group row mb-4">
                     <label for="name" class="col-sm-2 col-form-label text-black">Permissions saat ini <span style="color: red;">*</span></label>
-                    <div class="col-sm-10">
+                    <div id="role-permissions-tag" class="col-sm-10">
                         @if ($roles_edit->permissions)
                         @foreach ($roles_edit->Permissions as $role_permission)
                         <a href="{{ route('admin.roles.revokePermission', [$roles_edit->id, $role_permission->id]) }}" onclick=" return confirm('Yakin ingin menghapus data permission: {{ $role_permission->name }} ??')"><span
-                                class="badge badge-info">{{ $role_permission->name }}</span></a>
+                                class="badge badge-info" style="margin-bottom: 10px">{{ $role_permission->name }}</span></a>
 
                         @endforeach
                         @endif

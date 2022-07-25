@@ -59,6 +59,7 @@
 
             {{-- BEGIN MASTER VENDOR --}}
             <li class="menu">
+                @hasanyrole('admin|vendor1')
                 <a href="{{ route('masterVendor.index') }}" aria-expanded="{{ request()->segment(1) == 'masterVendor' ? 'true' : '';  }}" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box">
@@ -69,12 +70,14 @@
                         <span>Master Vendor</span>
                     </div>
                 </a>
+                @endhasanyrole
             </li>
             {{-- AND MASTER VENDOR --}}
 
             {{-- BEGIN MASTER KANWIL --}}
             <li class="menu">
-                <a href="" aria-expanded="{{ request()->segment(1) == 'master_kanwil' ? 'true' : '';  }}" class="dropdown-toggle">
+                @hasanyrole('admin')
+                <a href="{{ route('masterKanwil.index') }}" aria-expanded="{{ request()->segment(1) == 'masterKanwil' ? 'true' : '';  }}" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box">
                             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
@@ -84,12 +87,14 @@
                         <span>Master Kanwil</span>
                     </div>
                 </a>
+                @endhasanyrole
             </li>
             {{-- AND MASTER KANWIL --}}
 
             {{-- BEGIN MASTER KC SUPERVISI --}}
             <li class="menu">
-                <a href="" aria-expanded="{{ request()->segment(1) == 'master_kc_supervisi' ? 'true' : '';  }}" class="dropdown-toggle">
+                @hasanyrole('admin')
+                <a href="{{ route('masterKcSupervisi.index') }}" aria-expanded="{{ request()->segment(1) == 'master_kc_supervisi' ? 'true' : '';  }}" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box">
                             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
@@ -99,6 +104,7 @@
                         <span>Master KC Supervisi</span>
                     </div>
                 </a>
+                @endhasanyrole
             </li>
             {{-- AND MASTER KC SUPERVISI --}}
 

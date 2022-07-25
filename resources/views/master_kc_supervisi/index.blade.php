@@ -1,4 +1,3 @@
-{{-- extends app.blade.php --}}
 @extends('layouts.app')
 @section('content')
 <div class="layout-px-spacing">
@@ -6,13 +5,13 @@
         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
             <div class="widget-content widget-content-area">
 
-                <h4 class="text-primary mb-4">Data Users</h4>
+                <h4 class="text-primary mb-4">Data Master Master Kc Supervisi</h4>
                 <hr class="mb-4">
 
                 <div class="row mb-4">
                     <div class="col mb-3">
-                        <button type="button" class="btn btn-primary mt-2 mr-2"><a href="{{ route('admin.users.create') }}" style="color: white">Tambah Data User</a></button>
-                        <button type="button" class="btn btn-primary mt-2 mr-2" data-toggle="modal" data-target="#users-import">
+                        <button type="button" class="btn btn-primary mt-2 mr-2"><a href="{{ route('masterKcSupervisi.create') }}" style="color: white">Tambah Data Master Kc Supervisi</a></button>
+                        <button type="button" class="btn btn-primary mt-2 mr-2" data-toggle="modal" data-target="#masterKcSupervisi-import">
                             Import
                         </button>
                         <button type="button" class="btn btn-primary mt-2 mr-2">Export</button>
@@ -28,17 +27,12 @@
                 </div>
                 @endif
 
-                <table class="table table-striped mb-4" id="users-table">
+                <table class="table table-striped mb-4" id="masterKanwil-table">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
-                            <th>Username</th>
-                            <th>Nik</th>
-                            <th>Unit Kerja</th>
-                            <th>Project</th>
-                            <th>Jabatan</th>
-                            <th>No Telepon</th>
+                            <th>Branchcode Kc Supervisi</th>
+                            <th>Kc Supervisi</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -48,7 +42,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="users-import" tabindex="-1" role="dialog" aria-labelledby="Import Data" aria-hidden="true">
+<div class="modal fade" id="masterKcSupervisi-import" tabindex="-1" role="dialog" aria-labelledby="Import Data" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -76,9 +70,5 @@
         </div>
     </div>
 </div>
-
-
-
-
 
 @endsection

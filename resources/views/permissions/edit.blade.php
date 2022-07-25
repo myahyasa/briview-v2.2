@@ -49,7 +49,7 @@
                         @if ($permissions_edit->roles)
                         @foreach ($permissions_edit->roles as $permission_role)
                         <a href="{{ route('admin.permissions.removeRoles', [$permissions_edit->id, $permission_role->id]) }}" onclick=" return confirm('Yakin ingin menghapus data role: {{ $permission_role->name }} ??')"><span
-                                class="badge badge-info">{{ $permission_role->name }}</span></a>
+                                class="badge badge-info" style="margin-bottom: 10px">{{ $permission_role->name }}</span></a>
 
                         @endforeach
                         @endif

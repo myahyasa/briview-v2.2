@@ -8,6 +8,9 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\MasterVendorController;
+use App\Http\Controllers\MasterKanwilController;
+use App\Http\Controllers\MasterKcSupervisiController;
+use App\Http\Controllers\MasterUkerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,7 +76,7 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
     Route::get('/permissions/{permission}/roles/{role}', [PermissionController::class, 'removeRoles'])->name('permissions.removeRoles');
 });
 
-// masteVendor
+// masterVendor
 Route::middleware(['auth', 'permission:masterVendor.getData'])->group(function(){
     Route::get('/masterVendor/getData', [MasterVendorController::class, 'getData'])->name('masterVendor.getData');
 });
@@ -94,4 +97,73 @@ Route::middleware(['auth', 'permission:masterVendor.delete'])->group(function(){
 });
 Route::middleware(['auth', 'permission:masterVendor.update'])->group(function(){
     Route::post('/masterVendor/update/{id}', [MasterVendorController::class, 'update'])->name('masterVendor.update');
+});
+
+// masterKanwil
+Route::middleware(['auth', 'permission:masterKanwil.getData'])->group(function(){
+    Route::get('/masterKanwil/getData', [MasterKanwilController::class, 'getData'])->name('masterKanwil.getData');
+});
+Route::middleware(['auth', 'permission:masterKanwil.index'])->group(function(){
+    Route::get('/masterKanwil/index', [MasterKanwilController::class, 'index'])->name('masterKanwil.index');
+});
+Route::middleware(['auth', 'permission:masterKanwil.create'])->group(function(){
+    Route::get('/masterKanwil/create', [MasterKanwilController::class, 'create'])->name('masterKanwil.create');
+});
+Route::middleware(['auth', 'permission:masterKanwil.post'])->group(function(){
+    Route::post('/masterKanwil/post', [MasterKanwilController::class, 'post'])->name('masterKanwil.post');
+});
+Route::middleware(['auth', 'permission:masterKanwil.edit'])->group(function(){
+    Route::get('/masterKanwil/edit/{id}', [MasterKanwilController::class, 'edit'])->name('masterKanwil.edit');
+});
+Route::middleware(['auth', 'permission:masterKanwil.delete'])->group(function(){
+    Route::get('/masterKanwil/delete/{id}', [MasterKanwilController::class, 'delete'])->name('masterKanwil.delete');
+});
+Route::middleware(['auth', 'permission:masterKanwil.update'])->group(function(){
+    Route::post('/masterKanwil/update/{id}', [MasterKanwilController::class, 'update'])->name('masterKanwil.update');
+});
+
+// masterKcSupervisi
+Route::middleware(['auth', 'permission:masterKcSupervisi.getData'])->group(function(){
+    Route::get('/masterKcSupervisi/getData', [MasterKcSupervisiController::class, 'getData'])->name('masterKcSupervisi.getData');
+});
+Route::middleware(['auth', 'permission:masterKcSupervisi.index'])->group(function(){
+    Route::get('/masterKcSupervisi/index', [MasterKcSupervisiController::class, 'index'])->name('masterKcSupervisi.index');
+});
+Route::middleware(['auth', 'permission:masterKcSupervisi.create'])->group(function(){
+    Route::get('/masterKcSupervisi/create', [MasterKcSupervisiController::class, 'create'])->name('masterKcSupervisi.create');
+});
+Route::middleware(['auth', 'permission:masterKcSupervisi.post'])->group(function(){
+    Route::post('/masterKcSupervisi/post', [MasterKcSupervisiController::class, 'post'])->name('masterKcSupervisi.post');
+});
+Route::middleware(['auth', 'permission:masterKcSupervisi.edit'])->group(function(){
+    Route::get('/masterKcSupervisi/edit/{id}', [MasterKcSupervisiController::class, 'edit'])->name('masterKcSupervisi.edit');
+});
+Route::middleware(['auth', 'permission:masterKcSupervisi.delete'])->group(function(){
+    Route::get('/masterKcSupervisi/delete/{id}', [MasterKcSupervisiController::class, 'delete'])->name('masterKcSupervisi.delete');
+});
+Route::middleware(['auth', 'permission:masterKcSupervisi.update'])->group(function(){
+    Route::post('/masterKcSupervisi/update/{id}', [MasterKcSupervisiController::class, 'update'])->name('masterKcSupervisi.update');
+});
+
+// masterUker
+Route::middleware(['auth', 'permission:masterUker.getData'])->group(function(){
+    Route::get('/masterUker/getData', [MasterUkerController::class, 'getData'])->name('masterUker.getData');
+});
+Route::middleware(['auth', 'permission:masterUker.index'])->group(function(){
+    Route::get('/masterUker/index', [MasterUkerController::class, 'index'])->name('masterUker.index');
+});
+Route::middleware(['auth', 'permission:masterUker.create'])->group(function(){
+    Route::get('/masterUker/create', [MasterUkerController::class, 'create'])->name('masterUker.create');
+});
+Route::middleware(['auth', 'permission:masterUker.post'])->group(function(){
+    Route::post('/masterUker/post', [MasterUkerController::class, 'post'])->name('masterUker.post');
+});
+Route::middleware(['auth', 'permission:masterUker.edit'])->group(function(){
+    Route::get('/masterUker/edit/{id}', [MasterUkerController::class, 'edit'])->name('masterUker.edit');
+});
+Route::middleware(['auth', 'permission:masterUker.delete'])->group(function(){
+    Route::get('/masterUker/delete/{id}', [MasterUkerController::class, 'delete'])->name('masterUker.delete');
+});
+Route::middleware(['auth', 'permission:masterUker.update'])->group(function(){
+    Route::post('/masterUker/update/{id}', [MasterUkerController::class, 'update'])->name('masterUker.update');
 });

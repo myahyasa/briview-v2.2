@@ -62,10 +62,10 @@
             columnDefs: [{
                 "targets": 8,
                 "render": function (data, type, row, meta) {
-                    return `<a href="{{ url('admin/users/edit/${row.id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i></a> |
-            <a href="{{ url('admin/users/delete/${row.id}') }}" onclick="return confirm('Yakin ingin menghapus data user: ${row.name} ??')"><i class="fa-solid fa-trash text-danger"></i></a>`;
+                    return `<a class="btn bg-transparent" href="{{ url('admin/users/edit/${row.id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit User & Rolenya</a> |
+            <a class="btn bg-transparent" href="{{ url('admin/users/delete/${row.id}') }}" onclick="return confirm('Yakin ingin menghapus data user: ${row.name} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
                 }
-            }],
+            }, ],
 
         });
     });
@@ -108,8 +108,8 @@
             columnDefs: [{
                 "targets": 2,
                 "render": function (data, type, row, meta) {
-                    return `<a href="{{ url('admin/roles/edit/${row.id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i></a> |
-            <a href="{{ url('admin/roles/delete/${row.id}') }}" onclick="return confirm('Yakin ingin menghapus data role: ${row.name} ??')"><i class="fa-solid fa-trash text-danger"></i></a>`;
+                    return `<a class="btn bg-transparent" href="{{ url('admin/roles/edit/${row.id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit Role & Permissionnya</a> |
+            <a class="btn bg-transparent" href="{{ url('admin/roles/delete/${row.id}') }}" onclick="return confirm('Yakin ingin menghapus data role: ${row.name} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
                 }
             }],
 
@@ -154,8 +154,8 @@
             columnDefs: [{
                 "targets": 2,
                 "render": function (data, type, row, meta) {
-                    return `<a href="{{ url('admin/permissions/edit/${row.id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i></a> |
-            <a href="{{ url('admin/permissions/delete/${row.id}') }}" onclick="return confirm('Yakin ingin menghapus data role: ${row.name} ??')"><i class="fa-solid fa-trash text-danger"></i></a>`;
+                    return `<a class="btn bg-transparent" href="{{ url('admin/permissions/edit/${row.id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit Permissions & Rolesnya</a> |
+            <a class="btn bg-transparent" href="{{ url('admin/permissions/delete/${row.id}') }}" onclick="return confirm('Yakin ingin menghapus data role: ${row.name} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
                 }
             }],
 
@@ -211,8 +211,8 @@
             columnDefs: [{
                 "targets": 4,
                 "render": function (data, type, row, meta) {
-                    return `<a href="{{ url('/masterVendor/edit/${row.id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i></a> |
-            <a href="{{ url('/masterVendor/delete/${row.id}') }}" onclick="return confirm('Yakin ingin menghapus data: ${row.vendor_name} ??')"><i class="fa-solid fa-trash text-danger"></i></a>`;
+                    return `<a class="btn bg-transparent" href="{{ url('/masterVendor/edit/${row.id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit</a> |
+            <a class="btn bg-transparent" href="{{ url('/masterVendor/delete/${row.id}') }}" onclick="return confirm('Yakin ingin menghapus data: ${row.vendor_name} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
                 }
             }],
 
@@ -221,3 +221,109 @@
 
 </script>
 {{-- ===============================================================END SCRIPT MASTER VENDOR=============================================================== --}}
+
+{{-- ===============================================================SCRIPT MASTER KANWIL=============================================================== --}}
+<script>
+    $(function () {
+        $('#masterKanwil-table').DataTable({
+            processing: true,
+            serverSide: true,
+            searchable: true,
+            scrollY: 500,
+            scrollX: true,
+            // scrollCollapse: true,
+            "order": [
+                [1, "asc"]
+            ],
+            "pagingType": "full_numbers",
+            paging: true,
+            pageLength: 50,
+            ajax: {
+                "async": "true",
+                "url": "{{ route('masterKanwil.getData') }}",
+                "dataType": "json"
+            },
+            columns: [{
+                    "data": null,
+                    "class": "align-top",
+                    "orderable": false,
+                    "searchable": false,
+                    "render": function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    data: 'branchcode_kanwil',
+                    name: 'branchcode_kanwil'
+                },
+                {
+                    data: 'kanwil',
+                    name: 'kanwil'
+                },
+            ],
+            columnDefs: [{
+                "targets": 3,
+                "render": function (data, type, row, meta) {
+                    return `<a class="btn bg-transparent" href="{{ url('/masterKanwil/edit/${row.id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit</a> |
+            <a class="btn bg-transparent" href="{{ url('/masterKanwil/delete/${row.id}') }}" onclick="return confirm('Yakin ingin menghapus data: ${row.kanwil} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
+                }
+            }],
+
+        });
+    });
+
+</script>
+{{-- ===============================================================END SCRIPT MASTER KANWIL=============================================================== --}}
+
+{{-- ===============================================================SCRIPT MASTER KC SUPERVISI=============================================================== --}}
+<script>
+    $(function () {
+        $('#masterKcSupervisi-table').DataTable({
+            processing: true,
+            serverSide: true,
+            searchable: true,
+            scrollY: 500,
+            scrollX: true,
+            // scrollCollapse: true,
+            "order": [
+                [1, "asc"]
+            ],
+            "pagingType": "full_numbers",
+            paging: true,
+            pageLength: 50,
+            ajax: {
+                "async": "true",
+                "url": "{{ route('masterKcSupervisi.getData') }}",
+                "dataType": "json"
+            },
+            columns: [{
+                    "data": null,
+                    "class": "align-top",
+                    "orderable": false,
+                    "searchable": false,
+                    "render": function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    data: 'branchcode_kc_supervisi',
+                    name: 'branchcode_kc_supervisi'
+                },
+                {
+                    data: 'kc_supervisi',
+                    name: 'kc_supervisi'
+                },
+            ],
+            columnDefs: [{
+                "targets": 3,
+                "render": function (data, type, row, meta) {
+                    return `<a class="btn bg-transparent" href="{{ url('/masterKcSupervisi/edit/${row.id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit</a> |
+            <a class="btn bg-transparent" href="{{ url('/masterKcSupervisi/delete/${row.id}') }}" onclick="return confirm('Yakin ingin menghapus data: ${row.kc_supervisi} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
+                }
+            }],
+
+        });
+    });
+
+</script>
+{{-- ===============================================================END SCRIPT MASTER KC SUPERVISI=============================================================== --}}

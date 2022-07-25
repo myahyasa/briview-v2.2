@@ -13,7 +13,7 @@ class PermissionController extends Controller
     
     public function getData(Request $request) {
 
-        return DataTables::of(Permission::query())->toJson();
+        return DataTables::of(Permission::all())->toJson();
 
     }
     
