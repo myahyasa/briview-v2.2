@@ -12,7 +12,7 @@ class CctvController extends Controller
 {
     public function getData() {
 
-        $cctvData = Cctv::join('tb_master_vendor', 'tb_master_vendor.id', '=', 'tb_cctv.tb_master_vendor_id')
+        $cctvData = Cctv::leftJoin('tb_master_vendor', 'tb_master_vendor.id', '=', 'tb_cctv.tb_master_vendor_id')
                                     ->select('*', 'tb_cctv.id as cctv_id')
                                     ->where('tb_cctv.is_deleted',0)
                                     ->where('tb_master_vendor.is_deleted',0)

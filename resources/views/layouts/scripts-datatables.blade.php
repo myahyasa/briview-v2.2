@@ -593,8 +593,8 @@
             columnDefs: [{
                 "targets": 8,
                 "render": function (data, type, row, meta) {
-                    return `<a class="btn bg-transparent" href="{{ url('/digitalSignage/edit/${row.cctv_id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit</a> |
-            <a class="btn bg-transparent" href="{{ url('/digitalSignage/delete/${row.cctv_id}') }}" onclick="return confirm('Yakin ingin menghapus data: ${row.sn_cctv} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
+                    return `<a class="btn bg-transparent" href="{{ url('/cctv/edit/${row.cctv_id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit</a> |
+            <a class="btn bg-transparent" href="{{ url('/cctv/delete/${row.cctv_id}') }}" onclick="return confirm('Yakin ingin menghapus data: ${row.sn_cctv} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
                 }
             }],
 

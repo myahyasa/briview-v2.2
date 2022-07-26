@@ -10,7 +10,7 @@
 
                 <div class="row mb-4">
                     <div class="col mb-3">
-                        <button type="button" class="btn btn-primary mt-2 mr-2"><a href="{{ route('digitalSignage.create') }}" style="color: white">Tambah Data Cctv</a></button>
+                        <button type="button" class="btn btn-primary mt-2 mr-2"><a href="{{ route('cctv.create') }}" style="color: white">Tambah Data Cctv</a></button>
                         <button type="button" class="btn btn-primary mt-2 mr-2" data-toggle="modal" data-target="#cctv-import">
                             Import
                         </button>

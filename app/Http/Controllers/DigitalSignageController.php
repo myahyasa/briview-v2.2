@@ -12,9 +12,11 @@ class DigitalSignageController extends Controller
 {
     public function getData() {
 
-        $digitalSignageData = DigitalSignage::join('tb_master_vendor', 'tb_master_vendor.id', '=', 'tb_digital_signage.tb_master_vendor_id')
+        $digitalSignageData = DigitalSignage::leftJoin('tb_master_vendor', 'tb_master_vendor.id', '=', 'tb_digital_signage.tb_master_vendor_id')
                                     ->select('*', 'tb_digital_signage.id as digital_signage_id')
-                                    ->where('tb_digital_signage.is_deleted',0)->get();
+                                    ->where('tb_digital_signage.is_deleted',0)
+                                    ->where('tb_master_vendor.is_deleted',0)
+                                    ->get();
 
         return datatables::of($digitalSignageData)->toJson();
 

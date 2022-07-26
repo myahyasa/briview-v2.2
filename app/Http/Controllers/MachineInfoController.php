@@ -12,9 +12,11 @@ class MachineInfoController extends Controller
 {
     public function getData() {
 
-        $machineInfoData = MachineInfo::join('tb_master_vendor', 'tb_master_vendor.id', '=', 'tb_machine_info.tb_master_vendor_id')
+        $machineInfoData = MachineInfo::leftJoin('tb_master_vendor', 'tb_master_vendor.id', '=', 'tb_machine_info.tb_master_vendor_id')
                                     ->select('*', 'tb_machine_info.id as machine_info_id')
-                                    ->where('tb_machine_info.is_deleted',0)->get();
+                                    ->where('tb_machine_info.is_deleted',0)
+                                    ->where('tb_master_vendor.is_deleted',0)
+                                    ->get();
 
         return datatables::of($machineInfoData)->toJson();
 
@@ -78,7 +80,7 @@ class MachineInfoController extends Controller
 
     public function edit($id) {
 
-        $machineInfo_edit = MachineInfo::join('tb_master_vendor', 'tb_master_vendor.id', '=', 'tb_machine_info.tb_master_vendor_id')
+        $machineInfo_edit = MachineInfo::leftJoin('tb_master_vendor', 'tb_master_vendor.id', '=', 'tb_machine_info.tb_master_vendor_id')
                                     ->select('*', 'tb_machine_info.id as machine_info_id')
                                     ->where('tb_machine_info.id',$id)->first();
 
