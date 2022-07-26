@@ -13,6 +13,7 @@ use App\Http\Controllers\MasterVendorController;
 use App\Http\Controllers\MasterKanwilController;
 use App\Http\Controllers\MasterKcSupervisiController;
 use App\Http\Controllers\MasterUkerController;
+use App\Http\Controllers\CctvController;
 
 /*
 |--------------------------------------------------------------------------
@@ -246,4 +247,30 @@ Route::middleware(['auth', 'permission:digitalSignage.update'])->group(function(
 });
 Route::middleware(['auth', 'permission:digitalSignage.ambilDataVendor'])->group(function(){
     Route::post('/digitalSignage/ambilDataVendor', [DigitalSignageController::class, 'ambilDataVendor'])->name('digitalSignage.ambilDataVendor');
+});
+
+// cctv
+Route::middleware(['auth', 'permission:cctv.getData'])->group(function(){
+    Route::get('/cctv/getData', [CctvController::class, 'getData'])->name('cctv.getData');
+});
+Route::middleware(['auth', 'permission:cctv.index'])->group(function(){
+    Route::get('/cctv/index', [CctvController::class, 'index'])->name('cctv.index');
+});
+Route::middleware(['auth', 'permission:cctv.create'])->group(function(){
+    Route::get('/cctv/create', [CctvController::class, 'create'])->name('cctv.create');
+});
+Route::middleware(['auth', 'permission:cctv.post'])->group(function(){
+    Route::post('/cctv/post', [CctvController::class, 'post'])->name('cctv.post');
+});
+Route::middleware(['auth', 'permission:cctv.edit'])->group(function(){
+    Route::get('/cctv/edit/{id}', [CctvController::class, 'edit'])->name('cctv.edit');
+});
+Route::middleware(['auth', 'permission:cctv.delete'])->group(function(){
+    Route::get('/cctv/delete/{id}', [CctvController::class, 'delete'])->name('cctv.delete');
+});
+Route::middleware(['auth', 'permission:cctv.update'])->group(function(){
+    Route::post('/cctv/update/{id}', [CctvController::class, 'update'])->name('cctv.update');
+});
+Route::middleware(['auth', 'permission:cctv.ambilDataVendor'])->group(function(){
+    Route::post('/cctv/ambilDataVendor', [CctvController::class, 'ambilDataVendor'])->name('cctv.ambilDataVendor');
 });

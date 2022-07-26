@@ -74,59 +74,51 @@
             </li>
             {{-- AND MASTER VENDOR --}}
 
-            {{-- BEGIN MASTER KANWIL --}}
+            {{-- BEGIN MASTER LOKASI --}}
             <li class="menu">
-                @hasanyrole('admin')
-                <a href="{{ route('masterKanwil.index') }}" aria-expanded="{{ request()->segment(1) == 'masterKanwil' ? 'true' : '';  }}" class="dropdown-toggle">
+                <a href="#master_lokasi" data-toggle="collapse"
+                    aria-expanded="{{ request()->segment(1)=='masterKanwil'||request()->segment(1)=='masterKcSupervisi'||request()->segment(1)=='masterUker'||request()->segment(1)=='masterLokasiCrm'||request()->segment(1)=='masterKodePos' ? 'true' : '';  }}"
+                    class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box">
                             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                             <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
                             <line x1="12" y1="22.08" x2="12" y2="12"></line>
                         </svg>
-                        <span>Master Kanwil</span>
+                        <span>Master Lokasi</span>
                     </div>
-                </a>
-                @endhasanyrole
-            </li>
-            {{-- AND MASTER KANWIL --}}
-
-            {{-- BEGIN MASTER KC SUPERVISI --}}
-            <li class="menu">
-                @hasanyrole('admin')
-                <a href="{{ route('masterKcSupervisi.index') }}" aria-expanded="{{ request()->segment(1) == 'masterKcSupervisi' ? 'true' : '';  }}" class="dropdown-toggle">
-                    <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-chevron-right">
+                            <polyline points="9 18 15 12 9 6"></polyline>
                         </svg>
-                        <span>Master KC Supervisi</span>
                     </div>
                 </a>
-                @endhasanyrole
+                <ul class="collapse submenu list-unstyled {{ request()->segment(1)=='masterKanwil'||request()->segment(1)=='masterKcSupervisi'||request()->segment(1)=='masterUker'||request()->segment(1)=='masterLokasiCrm'||request()->segment(1)=='masterKodePos' ? 'show' : '';  }}"
+                    id="master_lokasi" data-parent="#accordionExample">
+                    <li class="{{ request()->segment(1) == 'masterKanwil' ? 'active' : '';  }}">
+                        <a href="{{ route('masterKanwil.index') }}"> Master Kanwil </a>
+                    </li>
+                    <li class="{{ request()->segment(1) == 'masterKcSupervisi' ? 'active' : '';  }}">
+                        <a href="{{ route('masterKcSupervisi.index') }}"> Master Kc Supervisi </a>
+                    </li>
+                    <li class="{{ request()->segment(1) == 'masterUker' ? 'active' : '';  }}">
+                        <a href="{{ route('masterUker.index') }}"> Master Uker </a>
+                    </li>
+                    <li class="{{ request()->segment(1) == 'masterLokasiCrm' ? 'active' : '';  }}">
+                        <a href=""> Master Lokasi CRM </a>
+                    </li>
+                    <li class="{{ request()->segment(1) == 'masterKodePos' ? 'active' : '';  }}">
+                        <a href=""> Master Kode Pos </a>
+                    </li>
+                </ul>
             </li>
-            {{-- AND MASTER KC SUPERVISI --}}
-
-            {{-- BEGIN MASTER UKER --}}
-            <li class="menu">
-                <a href="{{ route('masterUker.index') }}" aria-expanded="{{ request()->segment(1) == 'masterUker' ? 'true' : '';  }}" class="dropdown-toggle">
-                    <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                        </svg>
-                        <span>Master Uker</span>
-                    </div>
-                </a>
-            </li>
-            {{-- AND MASTER UKER --}}
+            {{-- END MASTER LOKASI --}}
 
             {{-- BEGIN MASTER CRM --}}
             <li class="menu">
-                <a href="#components" data-toggle="collapse"
-                    aria-expanded="{{ request()->segment(1)=='machineInfo'||request()->segment(1)=='tid_allocation'||request()->segment(1)=='digitalSignage'||request()->segment(1)=='cctv'||request()->segment(1)=='ups'||request()->segment(1)=='nvr'||request()->segment(1)=='cro_allocation'||request()->segment(1)=='master_unit_kerja'||request()->segment(1)=='detail_parameter_tid'||request()->segment(1)=='master_lokasi' ? 'true' : '';  }}"
+                <a href="#master_crm" data-toggle="collapse"
+                    aria-expanded="{{ request()->segment(1)=='machineInfo'||request()->segment(1)=='tidAllocation'||request()->segment(1)=='digitalSignage'||request()->segment(1)=='cctv'||request()->segment(1)=='ups'||request()->segment(1)=='nvr'||request()->segment(1)=='croAllocation'||request()->segment(1)=='detailParameterTid' ? 'true' : '';  }}"
                     class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box">
@@ -143,19 +135,19 @@
                         </svg>
                     </div>
                 </a>
-                <ul class="collapse submenu list-unstyled {{ request()->segment(1)=='machineInfo'||request()->segment(1)=='tid_allocation'||request()->segment(1)=='digitalSignage'||request()->segment(1)=='cctv'||request()->segment(1)=='ups'||request()->segment(1)=='nvr'||request()->segment(1)=='cro_allocation'||request()->segment(1)=='master_unit_kerja'||request()->segment(1)=='detail_parameter_tid'||request()->segment(1)=='master_lokasi' ? 'show' : 'hidden';  }}"
-                    id="components" data-parent="#accordionExample">
+                <ul class="collapse submenu list-unstyled {{ request()->segment(1)=='machineInfo'||request()->segment(1)=='tidAllocation'||request()->segment(1)=='digitalSignage'||request()->segment(1)=='cctv'||request()->segment(1)=='ups'||request()->segment(1)=='nvr'||request()->segment(1)=='croAllocation'||request()->segment(1)=='detailParameterTid' ? 'show' : 'hidden';  }}"
+                    id="master_crm" data-parent="#accordionExample">
                     <li class="{{ request()->segment(1) == 'machineInfo' ? 'active' : '';  }}">
-                        <a href="{{ route('machineInfo.index') }}"> Machine Info </a>
+                        <a href="{{ route('machineInfo.index') }}"> Machine Info (SLM) </a>
                     </li>
-                    <li class="{{ request()->segment(1) == 'tid_allocation' ? 'active' : '';  }}">
+                    <li class="{{ request()->segment(1) == 'tidAllocation' ? 'active' : '';  }}">
                         <a href=""> TID Allocation </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'digitalSignage' ? 'active' : '';  }}">
                         <a href="{{ route('digitalSignage.index') }}"> Digital Signage </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'cctv' ? 'active' : '';  }}">
-                        <a href=""> CCTV </a>
+                        <a href="{{ route('cctv.index') }}"> CCTV </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'ups' ? 'active' : '';  }}">
                         <a href=""> UPS </a>
@@ -163,17 +155,11 @@
                     <li class="{{ request()->segment(1) == 'nvr' ? 'active' : '';  }}">
                         <a href=""> NVR </a>
                     </li>
-                    <li class="{{ request()->segment(1) == 'cro_allocation' ? 'active' : '';  }}">
+                    <li class="{{ request()->segment(1) == 'croAllocation' ? 'active' : '';  }}">
                         <a href=""> CRO Allocation </a>
                     </li>
-                    <li class="{{ request()->segment(1) == 'master_unit_kerja' ? 'active' : '';  }}">
-                        <a href=""> Master Unit Kerja </a>
-                    </li>
-                    <li class="{{ request()->segment(1) == 'detail_parameter_tid' ? 'active' : '';  }}">
+                    <li class="{{ request()->segment(1) == 'detailParameterTid' ? 'active' : '';  }}">
                         <a href=""> Detail Parameter TID </a>
-                    </li>
-                    <li class="{{ request()->segment(1) == 'master_lokasi' ? 'active' : '';  }}">
-                        <a href=""> Master Lokasi </a>
                     </li>
                 </ul>
             </li>
@@ -181,7 +167,7 @@
 
             {{-- BEGIN Master SLA --}}
             <li class="menu">
-                <a href="#elements" data-toggle="collapse"
+                <a href="#master_sla" data-toggle="collapse"
                     aria-expanded="{{ request()->segment(1)=='master_service_point'||request()->segment(1)=='master_jarak_tempuh'||request()->segment(1)=='master_sla_problem'||request()->segment(1)=='mapping_ticket_to_rtl'||request()->segment(1)=='sla_tid' ? 'true' : '';  }}"
                     class="dropdown-toggle">
                     <div class="">
@@ -200,7 +186,7 @@
                     </div>
                 </a>
                 <ul class="collapse submenu list-unstyled {{ request()->segment(1)=='master_service_point'||request()->segment(1)=='master_jarak_tempuh'||request()->segment(1)=='master_sla_problem'||request()->segment(1)=='mapping_ticket_to_rtl'||request()->segment(1)=='sla_tid' ? 'show' : '';  }}"
-                    id="elements" data-parent="#accordionExample">
+                    id="master_sla" data-parent="#accordionExample">
                     <li class="{{ request()->segment(1) == 'master_service_point' ? 'active' : '';  }}">
                         <a href=""> Master Service Point </a>
                     </li>
