@@ -14,6 +14,7 @@ use App\Http\Controllers\MasterKanwilController;
 use App\Http\Controllers\MasterKcSupervisiController;
 use App\Http\Controllers\MasterUkerController;
 use App\Http\Controllers\CctvController;
+use App\Http\Controllers\UpsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -273,4 +274,30 @@ Route::middleware(['auth', 'permission:cctv.update'])->group(function(){
 });
 Route::middleware(['auth', 'permission:cctv.ambilDataVendor'])->group(function(){
     Route::post('/cctv/ambilDataVendor', [CctvController::class, 'ambilDataVendor'])->name('cctv.ambilDataVendor');
+});
+
+// ups
+Route::middleware(['auth', 'permission:ups.getData'])->group(function(){
+    Route::get('/ups/getData', [UpsController::class, 'getData'])->name('ups.getData');
+});
+Route::middleware(['auth', 'permission:ups.index'])->group(function(){
+    Route::get('/ups/index', [UpsController::class, 'index'])->name('ups.index');
+});
+Route::middleware(['auth', 'permission:ups.create'])->group(function(){
+    Route::get('/ups/create', [UpsController::class, 'create'])->name('ups.create');
+});
+Route::middleware(['auth', 'permission:ups.post'])->group(function(){
+    Route::post('/ups/post', [UpsController::class, 'post'])->name('ups.post');
+});
+Route::middleware(['auth', 'permission:ups.edit'])->group(function(){
+    Route::get('/ups/edit/{id}', [UpsController::class, 'edit'])->name('ups.edit');
+});
+Route::middleware(['auth', 'permission:ups.delete'])->group(function(){
+    Route::get('/ups/delete/{id}', [UpsController::class, 'delete'])->name('ups.delete');
+});
+Route::middleware(['auth', 'permission:ups.update'])->group(function(){
+    Route::post('/ups/update/{id}', [UpsController::class, 'update'])->name('ups.update');
+});
+Route::middleware(['auth', 'permission:ups.ambilDataVendor'])->group(function(){
+    Route::post('/ups/ambilDataVendor', [UpsController::class, 'ambilDataVendor'])->name('ups.ambilDataVendor');
 });

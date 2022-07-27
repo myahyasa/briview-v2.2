@@ -603,3 +603,76 @@
 
 </script>
 {{-- ===============================================================END SCRIPT CCTV=============================================================== --}}
+
+{{-- ===============================================================SCRIPT UPS=============================================================== --}}
+<script>
+    $(function () {
+        $('#ups-table').DataTable({
+            processing: true,
+            serverSide: true,
+            searchable: true,
+            scrollY: 500,
+            scrollX: true,
+            // scrollCollapse: true,
+            "order": [
+                [1, "asc"]
+            ],
+            "pagingType": "full_numbers",
+            paging: true,
+            pageLength: 50,
+            ajax: {
+                "async": "true",
+                "url": "{{ route('ups.getData') }}",
+                "dataType": "json"
+            },
+            columns: [{
+                    "data": null,
+                    "class": "align-top",
+                    "orderable": false,
+                    "searchable": false,
+                    "render": function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    data: 'vendor_name',
+                    name: 'vendor_name'
+                },
+                {
+                    data: 'brand',
+                    name: 'brand'
+                },
+                {
+                    data: 'sn_ups',
+                    name: 'sn_ups'
+                },
+                {
+                    data: 'type',
+                    name: 'type'
+                },
+                {
+                    data: 'no_spk',
+                    name: 'no_spk'
+                },
+                {
+                    data: 'project_name',
+                    name: 'project_name'
+                },
+                {
+                    data: 'year',
+                    name: 'year'
+                },
+            ],
+            columnDefs: [{
+                "targets": 8,
+                "render": function (data, type, row, meta) {
+                    return `<a class="btn bg-transparent" href="{{ url('/ups/edit/${row.ups_id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit</a> |
+            <a class="btn bg-transparent" href="{{ url('/ups/delete/${row.ups_id}') }}" onclick="return confirm('Yakin ingin menghapus data: ${row.sn_ups} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
+                }
+            }],
+
+        });
+    });
+
+</script>
+{{-- ===============================================================END SCRIPT UPS=============================================================== --}}

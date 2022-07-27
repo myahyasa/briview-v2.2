@@ -150,7 +150,7 @@
                         <a href="{{ route('cctv.index') }}"> CCTV </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'ups' ? 'active' : '';  }}">
-                        <a href=""> UPS </a>
+                        <a href="{{ route('ups.index') }}"> UPS </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'nvr' ? 'active' : '';  }}">
                         <a href=""> NVR </a>
