@@ -15,6 +15,7 @@ use App\Http\Controllers\MasterKcSupervisiController;
 use App\Http\Controllers\MasterUkerController;
 use App\Http\Controllers\CctvController;
 use App\Http\Controllers\UpsController;
+use App\Http\Controllers\NvrController;
 
 /*
 |--------------------------------------------------------------------------
@@ -300,4 +301,30 @@ Route::middleware(['auth', 'permission:ups.update'])->group(function(){
 });
 Route::middleware(['auth', 'permission:ups.ambilDataVendor'])->group(function(){
     Route::post('/ups/ambilDataVendor', [UpsController::class, 'ambilDataVendor'])->name('ups.ambilDataVendor');
+});
+
+// nvr
+Route::middleware(['auth', 'permission:nvr.getData'])->group(function(){
+    Route::get('/nvr/getData', [NvrController::class, 'getData'])->name('nvr.getData');
+});
+Route::middleware(['auth', 'permission:nvr.index'])->group(function(){
+    Route::get('/nvr/index', [NvrController::class, 'index'])->name('nvr.index');
+});
+Route::middleware(['auth', 'permission:nvr.create'])->group(function(){
+    Route::get('/nvr/create', [NvrController::class, 'create'])->name('nvr.create');
+});
+Route::middleware(['auth', 'permission:nvr.post'])->group(function(){
+    Route::post('/nvr/post', [NvrController::class, 'post'])->name('nvr.post');
+});
+Route::middleware(['auth', 'permission:nvr.edit'])->group(function(){
+    Route::get('/nvr/edit/{id}', [NvrController::class, 'edit'])->name('nvr.edit');
+});
+Route::middleware(['auth', 'permission:nvr.delete'])->group(function(){
+    Route::get('/nvr/delete/{id}', [NvrController::class, 'delete'])->name('nvr.delete');
+});
+Route::middleware(['auth', 'permission:nvr.update'])->group(function(){
+    Route::post('/nvr/update/{id}', [NvrController::class, 'update'])->name('nvr.update');
+});
+Route::middleware(['auth', 'permission:nvr.ambilDataVendor'])->group(function(){
+    Route::post('/nvr/ambilDataVendor', [NvrController::class, 'ambilDataVendor'])->name('nvr.ambilDataVendor');
 });

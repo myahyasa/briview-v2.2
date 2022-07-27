@@ -153,7 +153,7 @@
                         <a href="{{ route('ups.index') }}"> UPS </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'nvr' ? 'active' : '';  }}">
-                        <a href=""> NVR </a>
+                        <a href="{{ route('nvr.index') }}"> NVR </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'croAllocation' ? 'active' : '';  }}">
                         <a href=""> CRO Allocation </a>
