@@ -186,22 +186,22 @@
 </script>
 {{-- ===============================================================END SCRIPT CRO ALLOCATION=============================================================== --}}
 
-{{-- ===============================================================SCRIPT MASTER UNIT KERJA=============================================================== --}}
+{{-- ===============================================================SCRIPT MASTER LOKASI CRM=============================================================== --}}
 <script>
-    var form_tambah_data_master_unit_kerja = document.getElementById('form-tambah-data-master-unit-kerja');
-    var submit_tambah_data_master_unit_kerja = document.getElementById('submit-tambah-data-master-unit-kerja');
+    var form_tambah_data_master_lokasi_crm = document.getElementById('form-tambah-data-master-lokasi-crm');
+    var submit_tambah_data_master_lokasi_crm = document.getElementById('submit-tambah-data-master-lokasi-crm');
 
-    form_tambah_data_master_unit_kerja.addEventListener('submit', function () {
+    form_tambah_data_master_lokasi_crm.addEventListener('submit', function () {
 
-        submit_tambah_data_master_unit_kerja.setAttribute('disabled', 'disabled');
+        submit_tambah_data_master_lokasi_crm.setAttribute('disabled', 'disabled');
 
-        submit_tambah_data_master_unit_kerja.value = 'Tunggu...';
+        submit_tambah_data_master_lokasi_crm.value = 'Tunggu...';
 
 
     }, false);
 
 </script>
-{{-- ===============================================================END SCRIPT MASTER UNIT KERJA=============================================================== --}}
+{{-- ===============================================================END SCRIPT MASTER LOKASI CRM=============================================================== --}}
 
 
 {{-- ===============================================================SCRIPT DETAIL PARAMETER TID=============================================================== --}}

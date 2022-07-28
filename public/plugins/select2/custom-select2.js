@@ -370,15 +370,15 @@ $("#cro_allocation_ambilDataVendor").select2({
 });
 $('#cro_allocation_ambilDataVendor').css('font-weight', 'bold');
 
-// ambil data kanwil di master unit kerja
-$("#master_unit_kerja_ambilDataKanwil").select2({
+// ambil data kanwil di master lokasi crm
+$("#masterLokasiCrm_ambilDataKanwil").select2({
     language: {
         noResults: function (params) {
             return "Data tidak ditemukan.";
         }
     },
     ajax: {
-        url: "http://localhost:8000/master_unit_kerja/ambilDataKanwil",
+        url: "http://localhost:8000/masterLokasiCrm/ambilDataKanwil",
         type: 'POST',
         dataType: 'json',
         delay: 250,
@@ -396,17 +396,17 @@ $("#master_unit_kerja_ambilDataKanwil").select2({
     },
 
 });
-$('#master_unit_kerja_ambilDataKanwil').css('font-weight', 'bold');
+$('#masterLokasiCrm_ambilDataKanwil').css('font-weight', 'bold');
 
-// ambil data kanwil di master unit kerja
-$("#master_unit_kerja_ambilDataKcSupervisi").select2({
+// ambil data kanwil di master lokasi crm
+$("#masterLokasiCrm_ambilDataKcSupervisi").select2({
     language: {
         noResults: function (params) {
             return "Data tidak ditemukan.";
         }
     },
     ajax: {
-        url: "http://localhost:8000/master_unit_kerja/ambilDataKcSupervisi",
+        url: "http://localhost:8000/masterLokasiCrm/ambilDataKcSuperviz",
         type: 'POST',
         dataType: 'json',
         delay: 250,
@@ -424,17 +424,17 @@ $("#master_unit_kerja_ambilDataKcSupervisi").select2({
     },
 
 });
-$('#master_unit_kerja_ambilDataKcSupervisi').css('font-weight', 'bold');
+$('#masterLokasiCrm_ambilDataKcSupervisi').css('font-weight', 'bold');
 
-// ambil data uker di master unit kerja
-$("#master_unit_kerja_ambilDataUker").select2({
+// ambil data uker di master lokasi crm
+$("#masterLokasiCrm_ambilDataUker").select2({
     language: {
         noResults: function (params) {
             return "Data tidak ditemukan.";
         }
     },
     ajax: {
-        url: "http://localhost:8000/master_unit_kerja/ambilDataUker",
+        url: "http://localhost:8000/masterLokasiCrm/ambilDataUker",
         type: 'POST',
         dataType: 'json',
         delay: 250,
@@ -452,17 +452,17 @@ $("#master_unit_kerja_ambilDataUker").select2({
     },
 
 });
-$('#master_unit_kerja_ambilDataUker').css('font-weight', 'bold');
+$('#masterLokasiCrm_ambilDataUker').css('font-weight', 'bold');
 
-// ambil data kode pos di master unit kerja
-$("#master_unit_kerja_ambilDataKodePos").select2({
+// ambil data kode pos di master lokasi crm
+$("#masterLokasiCrm_ambilDataKodePos").select2({
     language: {
         noResults: function (params) {
             return "Data tidak ditemukan.";
         }
     },
     ajax: {
-        url: "http://localhost:8000/master_unit_kerja/ambilDataKodePos",
+        url: "http://localhost:8000/masterLokasiCrm/ambilDataKodePos",
         type: 'POST',
         dataType: 'json',
         delay: 250,
@@ -480,10 +480,10 @@ $("#master_unit_kerja_ambilDataKodePos").select2({
     },
 
 });
-$('#master_unit_kerja_ambilDataKodePos').css('font-weight', 'bold');
+$('#masterLokasiCrm_ambilDataKodePos').css('font-weight', 'bold');
 
-// ambil data location category di master unit kerja
-$("#master_unit_kerja_ambilDataCategory").select2({
+// ambil data location category di master lokasi crm
+$("#masterLokasiCrm_ambilDataCategory").select2({
     language: {
         noResults: function (params) {
             return "Data tidak ditemukan.";
@@ -491,10 +491,10 @@ $("#master_unit_kerja_ambilDataCategory").select2({
     }
 
 });
-$('#master_unit_kerja_ambilDataCategory').css('font-weight', 'bold');
+$('#masterLokasiCrm_ambilDataCategory').css('font-weight', 'bold');
 
-// ambil data status kepemilikan di master unit kerja
-$("#master_unit_kerja_ambilDataStatusKepemilikan").select2({
+// ambil data status kepemilikan di master lokasi crm
+$("#masterLokasiCrm_ambilDataStatusKepemilikan").select2({
     language: {
         noResults: function (params) {
             return "Data tidak ditemukan.";
@@ -502,10 +502,10 @@ $("#master_unit_kerja_ambilDataStatusKepemilikan").select2({
     }
 
 });
-$('#master_unit_kerja_ambilDataStatusKepemilikan').css('font-weight', 'bold');
+$('#masterLokasiCrm_ambilDataStatusKepemilikan').css('font-weight', 'bold');
 
-// ambil data Detail Location Group di master unit kerja
-$("#master_unit_kerja_ambilDataDetailLocationGroup").select2({
+// ambil data Detail Location Group di master lokasi crm
+$("#masterLokasiCrm_ambilDataDetailLocationGroup").select2({
     language: {
         noResults: function (params) {
             return "Data tidak ditemukan.";
@@ -513,10 +513,10 @@ $("#master_unit_kerja_ambilDataDetailLocationGroup").select2({
     }
 
 });
-$('#master_unit_kerja_ambilDataDetailLocationGroup').css('font-weight', 'bold');
+$('#masterLokasiCrm_ambilDataDetailLocationGroup').css('font-weight', 'bold');
 
-// ambil data Detail jenis lokasi di master unit kerja
-$("#master_unit_kerja_ambilDataJenisDetailLokasi").select2({
+// ambil data Detail jenis lokasi di master lokasi crm
+$("#masterLokasiCrm_ambilDataJenisDetailLokasi").select2({
     language: {
         noResults: function (params) {
             return "Data tidak ditemukan.";
@@ -524,10 +524,10 @@ $("#master_unit_kerja_ambilDataJenisDetailLokasi").select2({
     }
 
 });
-$('#master_unit_kerja_ambilDataJenisDetailLokasi').css('font-weight', 'bold');
+$('#masterLokasiCrm_ambilDataJenisDetailLokasi').css('font-weight', 'bold');
 
-// ambil data jam operasional di master unit kerja
-$("#master_unit_kerja_ambilDataJamOperasional").select2({
+// ambil data jam operasional di master lokasi crm
+$("#masterLokasiCrm_ambilDataJamOperasional").select2({
     language: {
         noResults: function (params) {
             return "Data tidak ditemukan.";
@@ -535,7 +535,7 @@ $("#master_unit_kerja_ambilDataJamOperasional").select2({
     }
 
 });
-$('#master_unit_kerja_ambilDataJamOperasional').css('font-weight', 'bold');
+$('#masterLokasiCrm_ambilDataJamOperasional').css('font-weight', 'bold');
 
 
 

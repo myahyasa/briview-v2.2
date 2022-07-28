@@ -749,3 +749,120 @@
 
 </script>
 {{-- ===============================================================END SCRIPT NVR=============================================================== --}}
+
+{{-- ===============================================================SCRIPT MASTER LOKASI CRM=============================================================== --}}
+<script>
+    $(function () {
+        $('#masterLokasiCrm-table').DataTable({
+            processing: true,
+            serverSide: true,
+            searchable: true,
+            scrollY: 500,
+            scrollX: true,
+            // scrollCollapse: true,
+            "order": [
+                [1, "asc"]
+            ],
+            "pagingType": "full_numbers",
+            paging: true,
+            pageLength: 50,
+            ajax: {
+                "async": "true",
+                "url": "{{ route('masterLokasiCrm.getData') }}",
+                "dataType": "json"
+            },
+            columns: [{
+                    "data": null,
+                    "class": "align-top",
+                    "orderable": false,
+                    "searchable": false,
+                    "render": function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                }, //0
+                {
+                    data: 'location_id',
+                    name: 'location_id'
+                }, //1
+                {
+                    data: 'kanwil',
+                    name: 'kanwil'
+                }, //2
+                {
+                    data: 'kc_supervisi',
+                    name: 'kc_supervisi'
+                }, //3
+                {
+                    data: 'uker',
+                    name: 'uker'
+                }, //4
+                {
+                    data: 'alamat',
+                    name: 'alamat'
+                }, //5
+                {
+                    data: 'longitude',
+                    name: 'longitude'
+                }, //6
+                {
+                    data: 'latitude',
+                    name: 'latitude'
+                }, //7
+                {
+                    data: 'location_category',
+                    name: 'location_category'
+                }, //8
+                {
+                    data: 'kode_pos',
+                    name: 'kode_pos'
+                }, //9
+                {
+                    data: 'status_kepemilikan',
+                    name: 'status_kepemilikan'
+                }, //10
+                {
+                    data: 'location_category_group',
+                    name: 'location_category_group'
+                }, //11
+                {
+                    data: 'detail_lokasi',
+                    name: 'detail_lokasi'
+                }, //12
+                {
+                    data: 'detail_location_group',
+                    name: 'detail_location_group'
+                }, //13
+                {
+                    data: 'jenis_detail_lokasi',
+                    name: 'jenis_detail_lokasi'
+                }, //14
+                {
+                    data: 'detail_lokasi_longitude',
+                    name: 'detail_lokasi_longitude'
+                }, //15
+                {
+                    data: 'detail_lokasi_latitude',
+                    name: 'detail_lokasi_latitude'
+                }, //16
+                {
+                    data: 'jam_operasional',
+                    name: 'jam_operasional'
+                }, //17
+                {
+                    data: 'namepic_nohp',
+                    name: 'namepic_nohp'
+                }, //18
+            ],
+            columnDefs: [{
+                "targets": 19,
+                "render": function (data, type, row, meta) {
+                    return `<a class="btn bg-transparent" href="{{ url('/masterLokasiCrm/edit/${row.master_lokasi_crm_id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit</a> |
+            <a class="btn bg-transparent" href="{{ url('/masterLokasiCrm/delete/${row.master_lokasi_crm_id}') }}" onclick="return confirm('Yakin ingin menghapus data: ${row.location_id} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
+                }
+            }],
+
+        });
+    });
+
+</script>
+{{-- ===============================================================END SCRIPT MASTER LOKASI CRM=============================================================== --}}

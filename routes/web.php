@@ -16,6 +16,8 @@ use App\Http\Controllers\MasterUkerController;
 use App\Http\Controllers\CctvController;
 use App\Http\Controllers\UpsController;
 use App\Http\Controllers\NvrController;
+use App\Http\Controllers\CroAllocationController;
+use App\Http\Controllers\MasterLokasiCrmController;
 
 /*
 |--------------------------------------------------------------------------
@@ -327,4 +329,65 @@ Route::middleware(['auth', 'permission:nvr.update'])->group(function(){
 });
 Route::middleware(['auth', 'permission:nvr.ambilDataVendor'])->group(function(){
     Route::post('/nvr/ambilDataVendor', [NvrController::class, 'ambilDataVendor'])->name('nvr.ambilDataVendor');
+});
+
+// cro allocation
+Route::middleware(['auth', 'permission:croAllocation.getData'])->group(function(){
+    Route::get('/croAllocation/getData', [CroAllocationController::class, 'getData'])->name('croAllocation.getData');
+});
+Route::middleware(['auth', 'permission:croAllocation.index'])->group(function(){
+    Route::get('/croAllocation/index', [CroAllocationController::class, 'index'])->name('croAllocation.index');
+});
+Route::middleware(['auth', 'permission:croAllocation.create'])->group(function(){
+    Route::get('/croAllocation/create', [CroAllocationController::class, 'create'])->name('croAllocation.create');
+});
+Route::middleware(['auth', 'permission:croAllocation.post'])->group(function(){
+    Route::post('/croAllocation/post', [CroAllocationController::class, 'post'])->name('croAllocation.post');
+});
+Route::middleware(['auth', 'permission:croAllocation.edit'])->group(function(){
+    Route::get('/croAllocation/edit/{id}', [CroAllocationController::class, 'edit'])->name('croAllocation.edit');
+});
+Route::middleware(['auth', 'permission:croAllocation.delete'])->group(function(){
+    Route::get('/croAllocation/delete/{id}', [CroAllocationController::class, 'delete'])->name('croAllocation.delete');
+});
+Route::middleware(['auth', 'permission:croAllocation.update'])->group(function(){
+    Route::post('/croAllocation/update/{id}', [CroAllocationController::class, 'update'])->name('croAllocation.update');
+});
+Route::middleware(['auth', 'permission:croAllocation.ambilDataVendor'])->group(function(){
+    Route::post('/croAllocation/ambilDataVendor', [CroAllocationController::class, 'ambilDataVendor'])->name('croAllocation.ambilDataVendor');
+});
+
+// master lokasi crm
+Route::middleware(['auth', 'permission:masterLokasiCrm.getData'])->group(function(){
+    Route::get('/masterLokasiCrm/getData', [MasterLokasiCrmController::class, 'getData'])->name('masterLokasiCrm.getData');
+});
+Route::middleware(['auth', 'permission:masterLokasiCrm.index'])->group(function(){
+    Route::get('/masterLokasiCrm/index', [MasterLokasiCrmController::class, 'index'])->name('masterLokasiCrm.index');
+});
+Route::middleware(['auth', 'permission:masterLokasiCrm.create'])->group(function(){
+    Route::get('/masterLokasiCrm/create', [MasterLokasiCrmController::class, 'create'])->name('masterLokasiCrm.create');
+});
+Route::middleware(['auth', 'permission:masterLokasiCrm.post'])->group(function(){
+    Route::post('/masterLokasiCrm/post', [MasterLokasiCrmController::class, 'post'])->name('masterLokasiCrm.post');
+});
+Route::middleware(['auth', 'permission:masterLokasiCrm.edit'])->group(function(){
+    Route::get('/masterLokasiCrm/edit/{id}', [MasterLokasiCrmController::class, 'edit'])->name('masterLokasiCrm.edit');
+});
+Route::middleware(['auth', 'permission:masterLokasiCrm.delete'])->group(function(){
+    Route::get('/masterLokasiCrm/delete/{id}', [MasterLokasiCrmController::class, 'delete'])->name('masterLokasiCrm.delete');
+});
+Route::middleware(['auth', 'permission:masterLokasiCrm.update'])->group(function(){
+    Route::post('/masterLokasiCrm/update/{id}', [MasterLokasiCrmController::class, 'update'])->name('masterLokasiCrm.update');
+});
+Route::middleware(['auth', 'permission:masterLokasiCrm.ambilDataKanwil'])->group(function(){
+    Route::post('/masterLokasiCrm/ambilDataKanwil', [MasterLokasiCrmController::class, 'ambilDataKanwil'])->name('masterLokasiCrm.ambilDataKanwil');
+});
+Route::middleware(['auth', 'permission:masterLokasiCrm.ambilDataKcSupervisi'])->group(function(){
+    Route::post('/masterLokasiCrm/ambilDataKcSupervisi', [MasterLokasiCrmController::class, 'ambilDataKcSupervisi'])->name('masterLokasiCrm.ambilDataKcSupervisi');
+});
+Route::middleware(['auth', 'permission:masterLokasiCrm.ambilDataUker'])->group(function(){
+    Route::post('/masterLokasiCrm/ambilDataUker', [MasterLokasiCrmController::class, 'ambilDataUker'])->name('masterLokasiCrm.ambilDataUker');
+});
+Route::middleware(['auth', 'permission:masterLokasiCrm.ambilDataKodePos'])->group(function(){
+    Route::post('/masterLokasiCrm/ambilDataKodePos', [MasterLokasiCrmController::class, 'ambilDataKodePos'])->name('masterLokasiCrm.ambilDataKodePos');
 });

@@ -106,7 +106,7 @@
                         <a href="{{ route('masterUker.index') }}"> Master Uker </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'masterLokasiCrm' ? 'active' : '';  }}">
-                        <a href=""> Master Lokasi CRM </a>
+                        <a href="{{ route('masterLokasiCrm.index') }}"> Master Lokasi CRM </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'masterKodePos' ? 'active' : '';  }}">
                         <a href=""> Master Kode Pos </a>
@@ -141,7 +141,7 @@
                         <a href="{{ route('machineInfo.index') }}"> Machine Info (SLM) </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'tidAllocation' ? 'active' : '';  }}">
-                        <a href=""> TID Allocation </a>
+                        <a href="{{ route('tidAllocation.index') }}"> TID Allocation </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'digitalSignage' ? 'active' : '';  }}">
                         <a href="{{ route('digitalSignage.index') }}"> Digital Signage </a>
@@ -156,7 +156,7 @@
                         <a href="{{ route('nvr.index') }}"> NVR </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'croAllocation' ? 'active' : '';  }}">
-                        <a href=""> CRO Allocation </a>
+                        <a href="{{ route('croAllocation.index') }}"> CRO Allocation </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'detailParameterTid' ? 'active' : '';  }}">
                         <a href=""> Detail Parameter TID </a>
