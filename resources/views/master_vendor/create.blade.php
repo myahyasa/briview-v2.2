@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <?php 
-$max_id = $max_vendor_id[0]->max_vendor_id;
-// dd($max_id);
+// $max_id = $max_id[0]->max_id;
+$max_id = $max_id_vendor->max_id;
 $vendor_id = (int) substr($max_id, 3, 3);
 $vendor_id++;
 

@@ -17,7 +17,9 @@ use App\Http\Controllers\CctvController;
 use App\Http\Controllers\UpsController;
 use App\Http\Controllers\NvrController;
 use App\Http\Controllers\CroAllocationController;
+use App\Http\Controllers\MasterKodePosController;
 use App\Http\Controllers\MasterLokasiCrmController;
+use App\Http\Controllers\DailyStatusKanwilController;
 
 /*
 |--------------------------------------------------------------------------
@@ -390,4 +392,35 @@ Route::middleware(['auth', 'permission:masterLokasiCrm.ambilDataUker'])->group(f
 });
 Route::middleware(['auth', 'permission:masterLokasiCrm.ambilDataKodePos'])->group(function(){
     Route::post('/masterLokasiCrm/ambilDataKodePos', [MasterLokasiCrmController::class, 'ambilDataKodePos'])->name('masterLokasiCrm.ambilDataKodePos');
+});
+
+// master kode pos
+Route::middleware(['auth', 'permission:masterKodePos.getData'])->group(function(){
+    Route::get('/masterKodePos/getData', [MasterKodePosController::class, 'getData'])->name('masterKodePos.getData');
+});
+Route::middleware(['auth', 'permission:masterKodePos.index'])->group(function(){
+    Route::get('/masterKodePos/index', [MasterKodePosController::class, 'index'])->name('masterKodePos.index');
+});
+Route::middleware(['auth', 'permission:masterKodePos.create'])->group(function(){
+    Route::get('/masterKodePos/create', [MasterKodePosController::class, 'create'])->name('masterKodePos.create');
+});
+Route::middleware(['auth', 'permission:masterKodePos.post'])->group(function(){
+    Route::post('/masterKodePos/post', [MasterKodePosController::class, 'post'])->name('masterKodePos.post');
+});
+Route::middleware(['auth', 'permission:masterKodePos.edit'])->group(function(){
+    Route::get('/masterKodePos/edit/{id}', [MasterKodePosController::class, 'edit'])->name('masterKodePos.edit');
+});
+Route::middleware(['auth', 'permission:masterKodePos.delete'])->group(function(){
+    Route::get('/masterKodePos/delete/{id}', [MasterKodePosController::class, 'delete'])->name('masterKodePos.delete');
+});
+Route::middleware(['auth', 'permission:masterKodePos.update'])->group(function(){
+    Route::post('/masterKodePos/update/{id}', [MasterKodePosController::class, 'update'])->name('masterKodePos.update');
+});
+
+// dashboard daily status kanwil
+Route::middleware(['auth', 'permission:dailyStatusKanwil.index'])->group(function(){
+    Route::get('/dailyStatusKanwil/index', [DailyStatusKanwilController::class, 'index'])->name('dailyStatusKanwil.index');
+});
+Route::middleware(['auth', 'permission:dailyStatusKanwil.dskIndexDetail'])->group(function(){
+    Route::get('/dailyStatusKanwil/dskIndexDetail/{branchcode_kanwil}/{problem}', [DailyStatusKanwilController::class, 'dskIndexDetail'])->name('dailyStatusKanwil.dskIndexDetail');
 });

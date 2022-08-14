@@ -221,22 +221,22 @@
 </script>
 {{-- ===============================================================END SCRIPT DETAIL PARAMETER TID=============================================================== --}}
 
-{{-- ===============================================================SCRIPT MASTER LOKASI=============================================================== --}}
+{{-- ===============================================================SCRIPT MASTER KODE POS=============================================================== --}}
 <script>
-    var form_tambah_data_master_lokasi = document.getElementById('form-tambah-data-master-lokasi');
-    var submit_tambah_data_master_lokasi = document.getElementById('submit-tambah-data-master-lokasi');
+    var form_tambah_data_master_kode_pos = document.getElementById('form-tambah-data-master-kode-pos');
+    var submit_tambah_data_master_kode_pos = document.getElementById('submit-tambah-data-master-kode-pos');
 
-    form_tambah_data_master_lokasi.addEventListener('submit', function () {
+    form_tambah_data_master_kode_pos.addEventListener('submit', function () {
 
-        submit_tambah_data_master_lokasi.setAttribute('disabled', 'disabled');
+        submit_tambah_data_master_kode_pos.setAttribute('disabled', 'disabled');
 
-        submit_tambah_data_master_lokasi.value = 'Tunggu...';
+        submit_tambah_data_master_kode_pos.value = 'Tunggu...';
 
 
     }, false);
 
 </script>
-{{-- ===============================================================END SCRIPT MASTER LOKASI=============================================================== --}}
+{{-- ===============================================================END SCRIPT MASTER KODE POS=============================================================== --}}
 
 {{-- ===============================================================SCRIPT MASTER SERVICE POINT=============================================================== --}}
 <script>

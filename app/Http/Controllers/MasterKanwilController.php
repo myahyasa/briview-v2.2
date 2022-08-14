@@ -6,14 +6,40 @@ use App\Models\MasterKanwil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
+use GuzzleHttp\Client;
 
 class MasterKanwilController extends Controller
 {
-    public function getData() {
+    public function getData(Request $request) {
 
-        $kanwilData = MasterKanwil::where('is_deleted',0)->get();
+        $client = new Client();
 
-        return datatables::of($kanwilData)->toJson();
+         $columns = array(
+            1 => 'branchcode_kanwil',
+            2 => 'kanwil',
+
+            
+        );
+
+        $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'getall-master',
+                'table' => 'tb_master_kanwil',
+                'limit' => $request->input('length'),
+                'start' =>  $request->input('start'),
+                'order' => $columns[$request->input('order.0.column')],
+                'dir' => $request->input('order.0.dir'),
+                'draw' => $request->input('draw'),
+                'search' => $request->input('search.value'),
+            ],
+            
+        ]);
+
+        $master_kanwil_data = json_decode($response->getBody())->result;
+
+        return $master_kanwil_data;
+
 
     }
 
@@ -46,13 +72,19 @@ class MasterKanwilController extends Controller
     
         );
 
-        MasterKanwil::insert([
+         $client = new Client();
 
-            'branchcode_kanwil' => $request->branchcode_kanwil,
-            'kanwil' => $request->kanwil,
-            'effective_date' => $request->effective_date,
-
-        ]);
+        $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'create-master',
+                'table' => 'tb_master_kanwil',
+                'branchcode_kanwil' => $request->branchcode_kanwil,
+                'kanwil' => $request->kanwil,
+                'effective_date' => $request->effective_date,
+            ],
+            
+        ]);   
 
         return redirect()->route('masterKanwil.index')->with('success', 'Master kanwil berhasil dibuat.');
 
@@ -60,7 +92,19 @@ class MasterKanwilController extends Controller
 
     public function edit($id) {
 
-        $masterKanwil_edit = MasterKanwil::where('id',$id)->first();
+        $client = new Client();
+
+            $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+                
+                'form_params' => [
+                    'comment' => 'get-master',
+                    'table' => 'tb_master_kanwil',
+                    'id' => $id,
+                ],
+                
+            ]); 
+            
+            $masterKanwil_edit = json_decode($response->getBody())->result->data;
 
         return view('master_kanwil.edit', compact('masterKanwil_edit'));
 
@@ -86,20 +130,33 @@ class MasterKanwilController extends Controller
 
         );
 
-        $expire_date = date("Y-m-d");
-        MasterKanwil::where('id',$id)
-                        ->update([
-                            'is_deleted' => 1,
-                            'expire_date' => $expire_date,
-                            'remarks' => $request->remarks
-                        ]);
+        $client = new Client();
+        $expire_date= date("Y-m-d");
 
-        MasterKanwil::insert([
-            'branchcode_kanwil' => $request->branchcode_kanwil,
-            'kanwil' => $request->kanwil,
-            'effective_date' => $request->effective_date,
-            'remarks' => $request->remarks,
-            'updated_at' => now(),
+        $response1 = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'update-master',
+                'table' => 'tb_master_kanwil',
+                'id' => $id,
+                'is_deleted' => 1,
+                'expire_date' => $expire_date,
+                'remarks' => $request->remarks,
+            ],
+            
+        ]); 
+        
+        $response2 = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'create-master',
+                'table' => 'tb_master_kanwil',
+                'branchcode_kanwil' => $request->branchcode_kanwil,
+                'kanwil' => $request->kanwil,
+                'effective_date' => $request->effective_date,
+                'remarks' => $request->remarks,
+            ],
+            
         ]);
 
         return redirect()->route('masterKanwil.index')->with('success', 'Master kanwil berhasil diupdate');
@@ -108,12 +165,22 @@ class MasterKanwilController extends Controller
 
     public function delete($id) {
 
-        $expire_date = date("Y-m-d");
-        MasterKanwil::where('id',$id)
-                        ->update([
-                            'is_deleted'=>1,
-                            'expire_date'=>$expire_date
-                        ]);
+        $client = new Client();
+         
+         $expire_date= date("Y-m-d");
+
+        $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'update-master',
+                'table' => 'tb_master_kanwil',
+                'id' => $id,
+                'is_deleted' => 1,
+                'expire_date' => $expire_date
+
+            ],
+            
+        ]);
 
         return redirect()->route('masterKanwil.index')->with('success', 'Master kanwil berhasil dihapus');
 

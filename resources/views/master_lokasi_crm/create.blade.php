@@ -20,7 +20,7 @@
                     <div class="form-group row">
                         <label for="kanwil" class="col-sm-2 col-form-label text-black">Kanwil <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <select class="form-control font-weight-bold" name="kanwil" id="masterLokasiCrm_ambilDataKanwil">
+                            <select class="form-control input1 @error('kanwil') is-invalid @enderror" name="kanwil" id="masterLokasiCrm_ambilDataKanwil">
                                 <option value="{{ old('kanwil') ? old('kanwil') : '' }}">{{ explode('|', old('kanwil'))[1] ?? '--kanwil--' }}</option>
                             </select>
                             @if ($errors->has('kanwil'))
@@ -31,7 +31,7 @@
                     <div class="form-group row">
                         <label for="kc_supervisi" class="col-sm-2 col-form-label text-black">Kc Supervisi <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <select class="form-control font-weight-bold" name="kc_supervisi" id="masterLokasiCrm_ambilDataKcSupervisi">
+                            <select class="form-control input1 @error('kc_supervisi') is-invalid @enderror" name="kc_supervisi" id="masterLokasiCrm_ambilDataKcSupervisi">
                                 <option value="{{ old('kc_supervisi') ? old('kc_supervisi') : '' }}">{{ explode('|', old('kc_supervisi'))[1] ?? '--kc supervisi--' }}</option>
                             </select>
                             @if ($errors->has('kc_supervisi'))
@@ -42,7 +42,7 @@
                     <div class="form-group row">
                         <label for="uker" class="col-sm-2 col-form-label text-black">Uker <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <select class="form-control font-weight-bold" name="uker" id="masterLokasiCrm_ambilDataUker">
+                            <select class="form-control input1 @error('uker') is-invalid @enderror" name="uker" id="masterLokasiCrm_ambilDataUker">
                                 <option value="{{ old('uker') ? old('uker') : '' }}">{{ explode('|', old('uker'))[1] ?? '--uker--' }}</option>
                             </select>
                             @if ($errors->has('uker'))
@@ -62,7 +62,7 @@
                     <div class="form-group row mb-4">
                         <label for="longitude" class="col-sm-2 col-form-label text-black">Longitude Uker <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control input1" name="longitude" id="longitude" placeholder="Longitude unit kerja" value="{{ old('longitude') }}">
+                            <input type="number" class="form-control input1 @error('longitude') is-invalid @enderror" name="longitude" id="longitude" placeholder="Longitude unit kerja" value="{{ old('longitude') }}">
                             @if ($errors->has('longitude'))
                             <span class="text-danger">{{ $errors->first('longitude') }}</span>
                             @endif
@@ -71,7 +71,7 @@
                     <div class="form-group row mb-4">
                         <label for="latitude" class="col-sm-2 col-form-label text-black">Latitude Uker <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control input1" name="latitude" id="latitude" placeholder="Latitude unit kerja" value="{{ old('latitude') }}">
+                            <input type="number" class="form-control input1 @error('latitude') is-invalid @enderror" name="latitude" id="latitude" placeholder="Latitude unit kerja" value="{{ old('latitude') }}">
                             @if ($errors->has('latitude'))
                             <span class="text-danger">{{ $errors->first('latitude') }}</span>
                             @endif
@@ -80,7 +80,7 @@
                     <div class="form-group row">
                         <label for="kode_pos" class="col-sm-2 col-form-label text-black">Kode Pos <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <select class="form-control font-weight-bold" name="kode_pos" id="masterLokasiCrm_ambilDataKodePos">
+                            <select class="form-control input1 @error('kode_pos') is-invalid @enderror" name="kode_pos" id="masterLokasiCrm_ambilDataKodePos">
                                 <option value="{{ old('kode_pos') ? old('kode_pos') : '' }}">{{ explode('|', old('kode_pos'))[1] ?? '--kode pos--' }}</option>
                             </select>
                             @if ($errors->has('kode_pos'))
@@ -91,7 +91,7 @@
                     <div class="form-group row mb-4">
                         <label for="location_category" class="col-sm-2 col-form-label text-black">Location Category <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <select class="form-control font-weight-bold" name="location_category" id="masterLokasiCrm_ambilDataCategory">
+                            <select class="form-control input1 @error('location_category') is-invalid @enderror" name="location_category" id="masterLokasiCrm_ambilDataCategory">
                                 <option selected disabled value="">--location category--</option>
                                 <option value="ALFAMART" {{old('location_category') == 'ALFAMART' ?  'selected' : ''}}>ALFAMART</option>
                                 <option value="ALFAMIDI" {{old('location_category') == 'ALFAMIDI' ?  'selected' : ''}}>ALFAMIDI</option>
@@ -161,7 +161,7 @@
                     <div class="form-group row mb-4">
                         <label for="status_kepemilikan" class="col-sm-2 col-form-label text-black">Status Kepemilikan <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <select class="form-control font-weight-bold" name="status_kepemilikan" id="masterLokasiCrm_ambilDataStatusKepemilikan">
+                            <select class="form-control input1 @error('status_kepemilikan') is-invalid @enderror" name="status_kepemilikan" id="masterLokasiCrm_ambilDataStatusKepemilikan">
                                 <option selected disabled value="">--status kepemilikan--</option>
                                 <option value="Sewa" {{old('status_kepemilikan') == 'Sewa' ?  'selected' : ''}}>Sewa</option>
                                 <option value="Milik Sendiri" {{old('status_kepemilikan') == 'Milik Sendiri' ?  'selected' : ''}}>Milik Sendiri</option>
@@ -174,7 +174,8 @@
                     <div class="form-group row mb-4">
                         <label for="location_category_group" class="col-sm-2 col-form-label text-black">Location Category Group <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control input1" name="location_category_group" id="location_category_group" placeholder="Location Category Group, contoh: UNIT KERJA" value="{{ old('location_category_group') }}">
+                            <input type="text" class="form-control input1 @error('location_category_group') is-invalid @enderror" name="location_category_group" id="location_category_group"
+                                placeholder="Location Category Group, contoh: UNIT KERJA" value="{{ old('location_category_group') }}">
                             @if ($errors->has('location_category_group'))
                             <span class="text-danger">{{ $errors->first('location_category_group') }}</span>
                             @endif
@@ -183,7 +184,7 @@
                     <div class="form-group row mb-4">
                         <label for="detail_location_group" class="col-sm-2 col-form-label text-black">Detail Location Group <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <select class="form-control font-weight-bold" name="detail_location_group" id="masterLokasiCrm_ambilDataDetailLocationGroup">
+                            <select class="form-control input1 @error('detail_location_group') is-invalid @enderror" name="detail_location_group" id="masterLokasiCrm_ambilDataDetailLocationGroup">
                                 <option selected disabled value="">--detail location group--</option>
                                 <option value="Branding" {{old('detail_location_group') == 'Branding' ?  'selected' : ''}}>Branding</option>
                                 <option value="Kerjasama" {{old('detail_location_group') == 'Kerjasama' ?  'selected' : ''}}>Kerjasama</option>
@@ -197,7 +198,8 @@
                     <div class="form-group row mb-4">
                         <label for="detail_lokasi" class="col-sm-2 col-form-label text-black">Detail Lokasi Mesin <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control input1" name="detail_lokasi" id="detail_lokasi" placeholder="Detail lokasi, merupakan lokasi mesin" value="{{ old('detail_lokasi') }}">
+                            <input type="text" class="form-control input1 @error('detail_lokasi_mesin') is-invalid @enderror" name="detail_lokasi" id="detail_lokasi" placeholder="Detail lokasi, merupakan lokasi mesin"
+                                value="{{ old('detail_lokasi') }}">
                             @if ($errors->has('detail_lokasi'))
                             <span class="text-danger">{{ $errors->first('detail_lokasi') }}</span>
                             @endif
@@ -206,7 +208,7 @@
                     <div class="form-group row mb-4">
                         <label for="jenis_detail_lokasi" class="col-sm-2 col-form-label text-black">Jenis Lokasi <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <select class="form-control font-weight-bold" name="jenis_detail_lokasi" id="masterLokasiCrm_ambilDataJenisDetailLokasi">
+                            <select class="form-control input1 @error('jenis_detail_lokasi') is-invalid @enderror" name="jenis_detail_lokasi" id="masterLokasiCrm_ambilDataJenisDetailLokasi">
                                 <option selected disabled value="">--jenis lokasi--</option>
                                 <option value="Onsite" {{old('jenis_detail_lokasi') == 'Onsite' ?  'selected' : ''}}>Onsite</option>
                                 <option value="Offsite" {{old('jenis_detail_lokasi') == 'Offsite' ?  'selected' : ''}}>Offsite</option>
@@ -219,7 +221,8 @@
                     <div class="form-group row mb-4">
                         <label for="detail_lokasi_longitude" class="col-sm-2 col-form-label text-black">Longitude Lokasi Mesin <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control input1" name="detail_lokasi_longitude" id="detail_lokasi_longitude" placeholder="Longitude lokasi mesin" value="{{ old('detail_lokasi_longitude') }}">
+                            <input type="number" class="form-control input1 @error('detail_lokasi_longitude') is-invalid @enderror" name="detail_lokasi_longitude" id="detail_lokasi_longitude" placeholder="Longitude lokasi mesin"
+                                value="{{ old('detail_lokasi_longitude') }}">
                             @if ($errors->has('detail_lokasi_longitude'))
                             <span class="text-danger">{{ $errors->first('detail_lokasi_longitude') }}</span>
                             @endif
@@ -228,7 +231,8 @@
                     <div class="form-group row mb-4">
                         <label for="detail_lokasi_latitude" class="col-sm-2 col-form-label text-black">Latitude Lokasi Mesin <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control input1" name="detail_lokasi_latitude" id="detail_lokasi_latitude" placeholder="latitude lokasi mesin" value="{{ old('detail_lokasi_latitude') }}">
+                            <input type="number" class="form-control input1 @error('detail_lokasi_latitude') is-invalid @enderror" name="detail_lokasi_latitude" id="detail_lokasi_latitude" placeholder="latitude lokasi mesin"
+                                value="{{ old('detail_lokasi_latitude') }}">
                             @if ($errors->has('detail_lokasi_latitude'))
                             <span class="text-danger">{{ $errors->first('detail_lokasi_latitude') }}</span>
                             @endif
@@ -237,7 +241,7 @@
                     <div class="form-group row mb-4">
                         <label for="jam_operasional" class="col-sm-2 col-form-label text-black">Jam Operasional <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <select class="form-control font-weight-bold" name="jam_operasional" id="masterLokasiCrm_ambilDataJamOperasional">
+                            <select class="form-control input1 @error('jam_operasional') is-invalid @enderror" name="jam_operasional" id="masterLokasiCrm_ambilDataJamOperasional">
                                 <option selected disabled value="">--jam operasional--</option>
                                 <option value="00:00 - 23:59" {{old('jam_operasional') == '00:00 - 23:59' ?  'selected' : ''}}>00:00 - 23:59</option>
                                 <option value="06:00 - 15:00" {{old('jam_operasional') == '06:00 - 15:00' ?  'selected' : ''}}>06:00 - 15:00</option>
@@ -256,7 +260,7 @@
                     <div class="form-group row mb-4">
                         <label for="namepic_nohp" class="col-sm-2 col-form-label text-black">Nama PIC & No. HP <span style="color: red;">*</span></label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control input1" name="namepic_nohp" id="namepic_nohp" placeholder="nama pic berserta nomor handphone" value="{{ old('namepic_nohp') }}">
+                            <input type="text" class="form-control input1 @error('namepic_nohp') is-invalid @enderror" name="namepic_nohp" id="namepic_nohp" placeholder="nama pic berserta nomor handphone" value="{{ old('namepic_nohp') }}">
                             @if ($errors->has('namepic_nohp'))
                             <span class="text-danger">{{ $errors->first('namepic_nohp') }}</span>
                             @endif

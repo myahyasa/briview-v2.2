@@ -188,6 +188,7 @@
             },
             columns: [{
                     "data": null,
+                    // "sortable": false,
                     "class": "align-top",
                     "orderable": false,
                     "searchable": false,
@@ -866,3 +867,114 @@
 
 </script>
 {{-- ===============================================================END SCRIPT MASTER LOKASI CRM=============================================================== --}}
+
+{{-- ===============================================================SCRIPT MASTER KODE POS=============================================================== --}}
+<script>
+    $(function () {
+        $('#masterKodePos-table').DataTable({
+            processing: true,
+            serverSide: true,
+            searchable: true,
+            scrollY: 500,
+            scrollX: true,
+            // scrollCollapse: true,
+            "order": [
+                [1, "asc"]
+            ],
+            "pagingType": "full_numbers",
+            paging: true,
+            pageLength: 50,
+            ajax: {
+                "async": "true",
+                "url": "{{ route('masterKodePos.getData') }}",
+                "dataType": "json"
+            },
+            columns: [{
+                    "data": null,
+                    "class": "align-top",
+                    "orderable": false,
+                    "searchable": false,
+                    "render": function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                }, //0
+                {
+                    data: 'kode_pos',
+                    name: 'kode_pos'
+                }, //1
+                {
+                    data: 'provinsi',
+                    name: 'provinsi'
+                }, //2
+                {
+                    data: 'kota',
+                    name: 'kota'
+                }, //3
+                {
+                    data: 'kecamatan',
+                    name: 'kecamatan'
+                }, //4
+            ],
+            columnDefs: [{
+                "targets": 5,
+                "render": function (data, type, row, meta) {
+                    return `<a class="btn bg-transparent" href="{{ url('/masterKodePos/edit/${row.id}') }}"><i class="fa-solid fa-pen-to-square text-success"></i>Edit</a> |
+            <a class="btn bg-transparent" href="{{ url('/masterKodePos/delete/${row.id}') }}" onclick="return confirm('Yakin ingin menghapus data: ${row.kode_pos} ??')"><i class="fa-solid fa-trash text-danger"></i>Hapus</a>`;
+                }
+            }],
+
+        });
+    });
+
+</script>
+
+{{-- ===============================================================END SCRIPT MASTER KODE POS=============================================================== --}}
+
+{{-- ===============================================================SCRIPT DSK INDEX=============================================================== --}}
+<script>
+    $(document).ready(function () {
+        $('#dsk-index').DataTable({
+            // scrollY: 500,
+            scrollX: true,
+            "pageLength": 50
+        });
+    });
+
+</script>
+{{-- ===============================================================END SCRIPT DSK INDEX=============================================================== --}}
+
+{{-- ===============================================================SCRIPT DSK INDEX DETAIL=============================================================== --}}
+<script>
+    var problem = $("#problem_hasBeenMapping").text();
+
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        $('#detail-dsk-index-table tfoot th').each(function () {
+            var title = $('#detail-dsk-index-table thead th').eq($(this).index()).text();
+            // $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            $(this).html('<input type="text" placeholder="Search " />');
+        });
+
+        // DataTable
+        var table = $('#detail-dsk-index-table').DataTable({
+            scrollX: true,
+            "dom": 'ltpr', //https://datatables.net/reference/option/dom
+            "oSearch": {
+                "sSearch": problem
+            },
+        });
+
+        // Apply the search
+        table.columns().every(function () {
+            var that = this;
+
+            $('input', this.footer()).on('keyup change', function () {
+                that
+                    .search(this.value)
+                    .draw();
+            });
+        });
+    });
+
+</script>
+{{-- ===============================================================SCRIPT DSK INDEX DETAIL=============================================================== --}}

@@ -6,14 +6,42 @@ use App\Models\MasterVendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
+use GuzzleHttp\Client;
 
 class MasterVendorController extends Controller
 {
-    public function getData() {
+    
+    public function getData(Request $request) {
 
-        $vendorData = MasterVendor::where('is_deleted',0)->get();
+        $token = session('token-auth');
+        $client = new Client();
 
-        return datatables::of($vendorData)->toJson();
+         $columns = array(
+            1 => 'vendor_id',
+            2 => 'vendor_name',
+            3 => 'service',
+
+            
+        );
+
+        $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'getall-master',
+                'table' => 'tb_master_vendor',
+                'limit' => $request->input('length'),
+                'start' =>  $request->input('start'),
+                'order' => $columns[$request->input('order.0.column')],
+                'dir' => $request->input('order.0.dir'),
+                'draw' => $request->input('draw'),
+                'search' => $request->input('search.value'),
+            ],
+            
+        ]);
+
+        $master_vendor_data = json_decode($response->getBody())->result;
+
+        return $master_vendor_data;
 
     }
 
@@ -23,17 +51,30 @@ class MasterVendorController extends Controller
 
     }
 
+
     public function create() {
 
-        $max_vendor_id = DB::select("select max(vendor_id) as max_vendor_id from tb_master_vendor where is_deleted = 0");
+         $client = new Client();
 
-        return view('master_vendor.create', compact('max_vendor_id'));
+        $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'get-max-vendor',
+            ],
+            
+        ]);
+
+        $max_id_vendor = json_decode($response->getBody())->result;
+
+        // dd($max_id_vendor);
+        
+        return view('master_vendor.create', compact('max_id_vendor'));
 
     }
 
     public function post(Request $request) {
 
-        $validatedData = $request->validate([
+        $request->validate([
 
                 'vendor_id' => 'required',
                 'vendor_name' => 'required',
@@ -50,22 +91,42 @@ class MasterVendorController extends Controller
     
         );
 
-        MasterVendor::insert([
+         $client = new Client();
 
-            'vendor_id' => $request->vendor_id,
-            'vendor_name' => $request->vendor_name,
-            'service' => $request->service,
-            'effective_date' => $request->effective_date,
-
-        ]);
-
+        $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'create-master',
+                'table' => 'tb_master_vendor',
+                'vendor_id' => $request->vendor_id,
+                'vendor_name' => $request->vendor_name,
+                'service' => $request->service,
+                'effective_date' => $request->effective_date,
+            ],
+            
+        ]);   
+        
         return redirect()->route('masterVendor.index')->with('success', 'Master vendor berhasil dibuat.');
 
     }
 
     public function edit($id) {
 
-        $masterVendor_edit = MasterVendor::where('id',$id)->first();
+         $client = new Client();
+
+            $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+                
+                'form_params' => [
+                    'comment' => 'get-master',
+                    'table' => 'tb_master_vendor',
+                    'id' => $id,
+                ],
+                
+            ]); 
+            
+            $masterVendor_edit = json_decode($response->getBody())->result->data;
+
+            // dd($masterVendor_edit);
 
         return view('master_vendor.edit', compact('masterVendor_edit'));
 
@@ -73,7 +134,7 @@ class MasterVendorController extends Controller
 
     public function update(Request $request, $id) {
 
-        $validatedData = $request->validate(
+        $request->validate(
             [
 
                 'vendor_id' => 'required',
@@ -93,36 +154,59 @@ class MasterVendorController extends Controller
 
         );
 
-        $expire_date = date("Y-m-d");
-        MasterVendor::where('id',$id)
-                        ->update([
-                            'is_deleted' => 1,
-                            'expire_date' => $expire_date,
-                            'remarks' => $request->remarks
-                        ]);
+        $client = new Client();
+        $expire_date= date("Y-m-d");
 
-        MasterVendor::insert([
-            'vendor_id' => $request->vendor_id,
-            'vendor_name' => $request->vendor_name,
-            'service' => $request->service,
-            'effective_date' => $request->effective_date,
-            'remarks' => $request->remarks,
-            'updated_at' => now(),
-        ]);
-
+        $response1 = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'update-master',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'is_deleted' => 1,
+                'expire_date' => $expire_date,
+                'remarks' => $request->remarks,
+            ],
+            
+        ]); 
+        
+        $response2 = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'create-master',
+                'table' => 'tb_master_vendor',
+                'vendor_id' => $request->vendor_id,
+                'vendor_name' => $request->vendor_name,
+                'service' => $request->service,
+                'effective_date' => $request->effective_date,
+                'remarks' => $request->remarks,
+            ],
+            
+        ]); 
+        
         return redirect()->route('masterVendor.index')->with('success', 'Master vendor berhasil diupdate');
 
     }
 
     public function delete($id) {
 
-        $expire_date = date("Y-m-d");
-        MasterVendor::where('id',$id)
-                        ->update([
-                            'is_deleted'=>1,
-                            'expire_date'=>$expire_date
-                        ]);
+        $client = new Client();
+         
+         $expire_date= date("Y-m-d");
 
+        $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'update-master',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'is_deleted' => 1,
+                'expire_date' => $expire_date
+
+            ],
+            
+        ]); 
+        
         return redirect()->route('masterVendor.index')->with('success', 'Master vendor berhasil dihapus');
 
     }

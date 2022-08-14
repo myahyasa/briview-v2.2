@@ -19,7 +19,7 @@
 
             {{-- MENU DASHBOARD --}}
             <li class="menu">
-                <a href="#dashboard" data-toggle="collapse" aria-expanded="{{ request()->segment(1) == 'home' ? 'true' : '';  }}" class="dropdown-toggle">
+                <a href="#dashboard" data-toggle="collapse" aria-expanded="{{ request()->segment(1)=='dailyStatusKanwil'||request()->segment(1)=='home' ? 'true' : '';  }}" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -34,9 +34,9 @@
                         </svg>
                     </div>
                 </a>
-                <ul class="collapse submenu list-unstyled" id="dashboard" data-parent="#accordionExample">
-                    <li class="">
-                        <a href="index.html"> Daily Status Kanwil </a>
+                <ul class="collapse submenu list-unstyled {{ request()->segment(1)=='dailyStatusKanwil'||request()->segment(1)=='home' ? 'show' : '';  }}" id="dashboard" data-parent="#accordionExample">
+                    <li class="{{ request()->segment(1) == 'dailyStatusKanwil' ? 'active' : '';  }}">
+                        <a href="{{ route('dailyStatusKanwil.index') }}"> Daily Status Kanwil </a>
                     </li>
                     <li>
                         <a href="index2.html"> Performance FLM </a>
@@ -109,7 +109,7 @@
                         <a href="{{ route('masterLokasiCrm.index') }}"> Master Lokasi CRM </a>
                     </li>
                     <li class="{{ request()->segment(1) == 'masterKodePos' ? 'active' : '';  }}">
-                        <a href=""> Master Kode Pos </a>
+                        <a href="{{ route('masterKodePos.index') }}"> Master Kode Pos </a>
                     </li>
                 </ul>
             </li>
