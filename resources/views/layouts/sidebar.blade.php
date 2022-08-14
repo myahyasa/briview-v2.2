@@ -384,7 +384,7 @@
             </li>
 
             <li class="menu">
-                <a href="dragndrop_dragula.html" aria-expanded="false" class="dropdown-toggle">
+                <a href="{{ route('telescope.getData') }}" aria-expanded="{{ request()->segment(1) == 'admin' && request()->segment(2) == 'telescope' ? 'true' : '';  }}" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rotate-ccw">
                             <polyline points="1 4 1 10 7 10"></polyline>

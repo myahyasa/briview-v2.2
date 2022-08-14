@@ -50,6 +50,10 @@ Route::group([], function(){
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
+Route::middleware(['auth', 'permission:telescope.getData'])->group(function(){
+    Route::get('/telescope/requests/')->name('telescope.getData');
+});
+
 Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->group(function(){
 
     Route::get('/users/getData', [UsersController::class, 'getData'])->name('users.getData');
@@ -83,6 +87,8 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
     Route::post('/permissions/ambilDataRoles', [PermissionController::class, 'ambilDataRoles'])->name('permissions.ambilDataRoles');
     Route::post('/permissions/{permission}/roles', [PermissionController::class, 'assignRoles'])->name('permissions.assignRoles');
     Route::get('/permissions/{permission}/roles/{role}', [PermissionController::class, 'removeRoles'])->name('permissions.removeRoles');
+
+    
 });
 
 // masterVendor
