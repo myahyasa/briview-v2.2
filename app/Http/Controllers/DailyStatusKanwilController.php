@@ -41,7 +41,7 @@ class DailyStatusKanwilController extends Controller
 
     }
 
-    public function dskIndexDetail($branchcodeKanwil, $problem) {
+    public function dskIndexDetail($branchcodeKanwil, $problem, $tiketType) {
 
         $client = new  Client();
 
@@ -57,9 +57,85 @@ class DailyStatusKanwilController extends Controller
         ]);
 
         $detailTiketIndex = json_decode($response->getBody())->result->data;
-        // dd($branchcodeKanwil);
+        
+        // edit data aging  
+        for ($i=0; $i < sizeof($detailTiketIndex) ; $i++) { 
+            $sla = $detailTiketIndex[$i]->aging;
+            $hours = floor($sla / 60).' jam'.' : '.($sla - floor($sla / 60) * 60).' menit';
+            $detailTiketIndex[$i]->aging = $hours;
+        }
+        
 
-        return view('daily_status_kanwil.detail_tiket_dsk', compact('detailTiketIndex','problem'));
+        return view('daily_status_kanwil.detail_tiket_dsk', compact('detailTiketIndex','problem', 'tiketType'));
+
+    }
+
+    public function dskByKc($branchcodeKanwil) {
+
+        $client = new  Client();
+
+        
+        $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'get-dsk-by-kc',
+                'branchcode_kanwil' => $branchcodeKanwil,
+                
+            ],
+            
+        ]);
+
+        $dskByKc = json_decode($response->getBody())->result->data;
+            
+        return view('daily_status_kanwil.dsk_by_kc', compact('dskByKc'));
+
+    }
+
+    public function dskIndexDetailSum($problem, $tiketType) {
+
+        $client = new  Client();
+
+        
+        $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'get-dsk-index-detail-sum',
+                
+            ],
+            
+        ]);
+
+        $dskIndexDetailSum = json_decode($response->getBody())->result->data;
+
+         // edit data aging  
+        for ($i=0; $i < sizeof($dskIndexDetailSum) ; $i++) { 
+            $sla = $dskIndexDetailSum[$i]->aging;
+            $hours = floor($sla / 60).' jam'.' : '.($sla - floor($sla / 60) * 60).' menit';
+            $dskIndexDetailSum[$i]->aging = $hours;
+        }
+            
+        return view('daily_status_kanwil.dsk_index_detail_sum', compact('dskIndexDetailSum', 'problem', 'tiketType'));
+
+    }
+
+    public function dskByTid($branchcodeKc) {
+
+        $client = new  Client();
+
+        
+        $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'get-dsk-by-tid',
+                'branchcode_kc' => $branchcodeKc,
+                
+            ],
+            
+        ]);
+
+        $dskByTid = json_decode($response->getBody())->result->data;
+
+        return view('daily_status_kanwil.dsk_by_tid', compact('dskByTid'));
 
     }
     

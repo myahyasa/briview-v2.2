@@ -428,5 +428,14 @@ Route::middleware(['auth', 'permission:dailyStatusKanwil.index'])->group(functio
     Route::get('/dailyStatusKanwil/index', [DailyStatusKanwilController::class, 'index'])->name('dailyStatusKanwil.index');
 });
 Route::middleware(['auth', 'permission:dailyStatusKanwil.dskIndexDetail'])->group(function(){
-    Route::get('/dailyStatusKanwil/dskIndexDetail/{branchcode_kanwil}/{problem}', [DailyStatusKanwilController::class, 'dskIndexDetail'])->name('dailyStatusKanwil.dskIndexDetail');
+    Route::get('/dailyStatusKanwil/dskIndexDetail/{branchcode_kanwil}/{problem}/{tiket_type}', [DailyStatusKanwilController::class, 'dskIndexDetail'])->name('dailyStatusKanwil.dskIndexDetail');
+});
+Route::middleware(['auth', 'permission:dailyStatusKanwil.dskByKc'])->group(function(){
+    Route::get('/dailyStatusKanwil/dskByKc/{branchcode_kanwil}', [DailyStatusKanwilController::class, 'dskByKc'])->name('dailyStatusKanwil.dskByKc');
+});
+Route::middleware(['auth', 'permission:dailyStatusKanwil.dskIndexDetailSum'])->group(function(){
+    Route::get('/dailyStatusKanwil/dskIndexDetailSum/{problem}/{tiket_type}', [DailyStatusKanwilController::class, 'dskIndexDetailSum'])->name('dailyStatusKanwil.dskIndexDetailSum');
+});
+Route::middleware(['auth', 'permission:dailyStatusKanwil.dskByTid'])->group(function(){
+    Route::get('/dailyStatusKanwil/dskByTid/{branchcode_kc_supervisi}', [DailyStatusKanwilController::class, 'dskByTid'])->name('dailyStatusKanwil.dskByTid');
 });

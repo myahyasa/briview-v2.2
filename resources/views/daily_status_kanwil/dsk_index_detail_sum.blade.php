@@ -5,7 +5,7 @@
         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
             <div class="widget-content widget-content-area">
 
-                <h4 class="text-primary mb-4">Detail Tiket</h4>
+                <h4 class="text-primary mb-4">Detail Tiket Sum</h4>
                 <hr class="mb-4">
 
                 {{-- problem dari link --}}
@@ -29,7 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($detailTiketIndex as $item)
+                            @foreach ($dskIndexDetailSum as $item)
                             <tr>
                                 <td>{{ $item->master_tid }}</td>
 

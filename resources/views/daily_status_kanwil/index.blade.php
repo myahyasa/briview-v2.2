@@ -77,7 +77,7 @@
                             @foreach ($master_dskIndex_data as $item)
                             <tr class="text-center" style="font-weight: bold; vertical-align: middle;">
                                 <td>{{$i++}}</td>
-                                <td><a class="text-primary" id="kanwil" href="{{url('/admin/DailyStatusKanwil/daily_ticket_by_kc/'.$item->kode_kanwil)}}" target="_blank" rel="noopener noreferrer">{{$item->kanwil}}</a></td>
+                                <td><a class="text-primary" id="kanwil" href="{{url('/dailyStatusKanwil/dskByKc/'.$item->kode_kanwil)}}" target="_blank" rel="noopener noreferrer">{{$item->kanwil}}</a></td>
                                 <td>{{$item->machines}}</td>
                                 <td>{{ $item->up_tunai }}</td>
                                 <td style="background-color: #7FFF00"><?php $this_performance = (number_format($item->target_performance,2).'%'); echo($this_performance);  ?></td>
@@ -85,7 +85,7 @@
                                 {{-- reliability & pencapaian --}}
                                 <?php $this_reliability = (number_format(($item->reliability*100),2).'%');
 
-                                if($this_reliability <= 90) { ?>
+                                if($this_reliability < 90) { ?>
                                 <td style="background-color: #FF3131"><?php $this_reliability = (number_format(($item->reliability*100),2).'%'); echo($this_reliability); ?></td>
                                 <td style="background-color: #FF3131">
                                     <?php 
@@ -94,18 +94,9 @@
                                     ?>
                                 </td>
 
-                                <?php } elseif($this_reliability <= 95 ) { ?>
+                                <?php } elseif($this_reliability < 95 ) { ?>
                                 <td style="background-color: 	#FFFF00"><?php $this_reliability = (number_format(($item->reliability*100),2).'%'); echo($this_reliability); ?></td>
                                 <td style="background-color: 	#FFFF00">
-                                    <?php 
-                                    $pencapaian = @(($this_reliability / $this_performance)*100);
-                                    echo (number_format($pencapaian,2)).'%';
-                                    ?>
-                                </td>
-
-                                <?php } elseif($this_reliability <= 95.50 ) { ?>
-                                <td style="background-color: 	#90EE90"><?php $this_reliability = (number_format(($item->reliability*100),2).'%'); echo($this_reliability); ?></td>
-                                <td style="background-color: 	#90EE90">
                                     <?php 
                                     $pencapaian = @(($this_reliability / $this_performance)*100);
                                     echo (number_format($pencapaian,2)).'%';
@@ -128,14 +119,14 @@
 
                                 {{--7 No Trx In FLM --}}
                                 <?php if($item->in_flm_ntx != 0) { ?>
-                                <td><a class="text-danger" href="{{url('/dailyStatusKanwil/dskIndexDetail/'.$item->kode_kanwil.'/in_flm_ntx')}}" target="_blank">{{$item->in_flm_ntx}}</a></td>
+                                <td><a class="text-danger" href="{{url('/dailyStatusKanwil/dskIndexDetail/'.$item->kode_kanwil.'/in_flm_ntx/flm')}}" target="_blank">{{$item->in_flm_ntx}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$item->in_flm_ntx}}</td>
                                 <?php } ?>
 
                                 {{--7 Cash Out In FLM --}}
                                 <?php if($item->in_flm_co != 0) { ?>
-                                <td><a class="text-danger" href="{{url('/dailyStatusKanwil/dskIndexDetail/'.$item->kode_kanwil.'/in_flm_co')}}" target="_blank">{{$item->in_flm_co}}</a></td>
+                                <td><a class="text-danger" href="{{url('/dailyStatusKanwil/dskIndexDetail/'.$item->kode_kanwil.'/in_flm_co/flm')}}" target="_blank">{{$item->in_flm_co}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$item->in_flm_co}}</td>
                                 <?php } ?>
@@ -181,7 +172,7 @@
 
                                 {{--13 Cash Out Out FLM --}}
                                 <?php if($item->out_flm_co != 0) { ?>
-                                <td><a class="text-danger" href="{{url('/dailyStatusKanwil/dskIndexDetail/'.$item->kode_kanwil.'/out_flm_co')}}" target="_blank">{{$item->out_flm_co}}</a></td>
+                                <td><a class="text-danger" href="{{url('/dailyStatusKanwil/dskIndexDetail/'.$item->kode_kanwil.'/out_flm_co/flm')}}" target="_blank">{{$item->out_flm_co}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$item->out_flm_co}}</td>
                                 <?php } ?>
@@ -355,210 +346,210 @@
 
                                 {{--37 in_flm_ntx_sum--}}
                                 <?php if($dskIndex_sum->in_flm_ntx != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_flm_ntx')}}" target="_blank">{{$dskIndex_sum->in_flm_ntx}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_flm_ntx')}}" target="_blank">{{$dskIndex_sum->in_flm_ntx}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_flm_ntx}}</td>
                                 <?php } ?>
 
                                 {{--37 in_flm_co_sum--}}
                                 <?php if($dskIndex_sum->in_flm_co != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_flm_co')}}" target="_blank">{{$dskIndex_sum->in_flm_co}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_flm_co')}}" target="_blank">{{$dskIndex_sum->in_flm_co}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_flm_co}}</td>
                                 <?php } ?>
 
                                 {{--37 in_flm_cf_sum--}}
                                 <?php if($dskIndex_sum->in_flm_cf != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_flm_cf')}}" target="_blank">{{$dskIndex_sum->in_flm_cf}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_flm_cf')}}" target="_blank">{{$dskIndex_sum->in_flm_cf}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_flm_cf}}</td>
                                 <?php } ?>
 
                                 {{--37 in_flm_df_sum--}}
                                 <?php if($dskIndex_sum->in_flm_df != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_flm_df')}}" target="_blank">{{$dskIndex_sum->in_flm_df}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_flm_df')}}" target="_blank">{{$dskIndex_sum->in_flm_df}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_flm_df}}</td>
                                 <?php } ?>
 
                                 {{--37 in_flm_receipt_sum--}}
                                 <?php if($dskIndex_sum->in_flm_receipt != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_flm_receipt')}}" target="_blank">{{$dskIndex_sum->in_flm_receipt}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_flm_receipt')}}" target="_blank">{{$dskIndex_sum->in_flm_receipt}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_flm_receipt}}</td>
                                 <?php } ?>
 
                                 {{--37 in_flm_part_sum--}}
                                 <?php if($dskIndex_sum->in_flm_part != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_flm_part')}}" target="_blank">{{$dskIndex_sum->in_flm_part}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_flm_part')}}" target="_blank">{{$dskIndex_sum->in_flm_part}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_flm_part}}</td>
                                 <?php } ?>
 
                                 {{--37 out_flm_ntx_sum--}}
                                 <?php if($dskIndex_sum->out_flm_ntx != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_flm_ntx')}}" target="_blank">{{$dskIndex_sum->out_flm_ntx}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_flm_ntx')}}" target="_blank">{{$dskIndex_sum->out_flm_ntx}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_flm_ntx}}</td>
                                 <?php } ?>
 
                                 {{--37 out_flm_co_sum--}}
                                 <?php if($dskIndex_sum->out_flm_co != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_flm_co')}}" target="_blank">{{$dskIndex_sum->out_flm_co}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_flm_co')}}" target="_blank">{{$dskIndex_sum->out_flm_co}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_flm_co}}</td>
                                 <?php } ?>
 
                                 {{--37 out_flm_cf_sum--}}
                                 <?php if($dskIndex_sum->out_flm_cf != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_flm_cf')}}" target="_blank">{{$dskIndex_sum->out_flm_cf}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_flm_cf')}}" target="_blank">{{$dskIndex_sum->out_flm_cf}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_flm_cf}}</td>
                                 <?php } ?>
 
                                 {{--37 out_flm_df_sum--}}
                                 <?php if($dskIndex_sum->out_flm_df != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_flm_df')}}" target="_blank">{{$dskIndex_sum->out_flm_df}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_flm_df')}}" target="_blank">{{$dskIndex_sum->out_flm_df}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_flm_df}}</td>
                                 <?php } ?>
 
                                 {{--37 out_flm_receipt_sum--}}
                                 <?php if($dskIndex_sum->out_flm_receipt != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_flm_receipt')}}" target="_blank">{{$dskIndex_sum->out_flm_receipt}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_flm_receipt')}}" target="_blank">{{$dskIndex_sum->out_flm_receipt}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_flm_receipt}}</td>
                                 <?php } ?>
 
                                 {{--37 out_flm_part_sum--}}
                                 <?php if($dskIndex_sum->out_flm_part != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_flm_part')}}" target="_blank">{{$dskIndex_sum->out_flm_part}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_flm_part')}}" target="_blank">{{$dskIndex_sum->out_flm_part}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_flm_part}}</td>
                                 <?php } ?>
 
                                 {{--37 in_slm_replace_sum--}}
                                 <?php if($dskIndex_sum->in_slm_replace != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_slm_replace')}}" target="_blank">{{$dskIndex_sum->in_slm_replace}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_slm_replace')}}" target="_blank">{{$dskIndex_sum->in_slm_replace}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_slm_replace}}</td>
                                 <?php } ?>
 
                                 {{--37 in_slm_network_sum--}}
                                 <?php if($dskIndex_sum->in_slm_network != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_slm_network')}}" target="_blank">{{$dskIndex_sum->in_slm_network}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_slm_network')}}" target="_blank">{{$dskIndex_sum->in_slm_network}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_slm_network}}</td>
                                 <?php } ?>
 
                                 {{--37 in_slm_host_sum--}}
                                 <?php if($dskIndex_sum->in_slm_host != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_slm_host')}}" target="_blank">{{$dskIndex_sum->in_slm_host}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_slm_host')}}" target="_blank">{{$dskIndex_sum->in_slm_host}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_slm_host}}</td>
                                 <?php } ?>
 
                                 {{--37 in_slm_electrical_sum--}}
                                 <?php if($dskIndex_sum->in_slm_electrical != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_slm_electrical')}}" target="_blank">{{$dskIndex_sum->in_slm_electrical}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_slm_electrical')}}" target="_blank">{{$dskIndex_sum->in_slm_electrical}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_slm_electrical}}</td>
                                 <?php } ?>
 
                                 {{--37 in_slm_vandalism_sum--}}
                                 <?php if($dskIndex_sum->in_slm_vandalism != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_slm_vandalism')}}" target="_blank">{{$dskIndex_sum->in_slm_vandalism}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_slm_vandalism')}}" target="_blank">{{$dskIndex_sum->in_slm_vandalism}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_slm_vandalism}}</td>
                                 <?php } ?>
 
                                 {{--37 in_slm_force_sum--}}
                                 <?php if($dskIndex_sum->in_slm_force != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_slm_force')}}" target="_blank">{{$dskIndex_sum->in_slm_force}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_slm_force')}}" target="_blank">{{$dskIndex_sum->in_slm_force}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_slm_force}}</td>
                                 <?php } ?>
 
                                 {{--37 in_slm_implement_sum--}}
                                 <?php if($dskIndex_sum->in_slm_implement != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_slm_implement')}}" target="_blank">{{$dskIndex_sum->in_slm_implement}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_slm_implement')}}" target="_blank">{{$dskIndex_sum->in_slm_implement}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_slm_implement}}</td>
                                 <?php } ?>
 
                                 {{--37 in_slm_location_sum--}}
                                 <?php if($dskIndex_sum->in_slm_location != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_slm_location')}}" target="_blank">{{$dskIndex_sum->in_slm_location}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_slm_location')}}" target="_blank">{{$dskIndex_sum->in_slm_location}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_slm_location}}</td>
                                 <?php } ?>
 
                                 {{--37 in_slm_nontech_sum--}}
                                 <?php if($dskIndex_sum->in_slm_nontech != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/in_slm_nontech')}}" target="_blank">{{$dskIndex_sum->in_slm_nontech}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/in_slm_nontech')}}" target="_blank">{{$dskIndex_sum->in_slm_nontech}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->in_slm_nontech}}</td>
                                 <?php } ?>
 
                                 {{--37 out_slm_replace_sum--}}
                                 <?php if($dskIndex_sum->out_slm_replace != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_slm_replace')}}" target="_blank">{{$dskIndex_sum->out_slm_replace}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_slm_replace')}}" target="_blank">{{$dskIndex_sum->out_slm_replace}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_slm_replace}}</td>
                                 <?php } ?>
 
                                 {{--37 out_slm_network_sum--}}
                                 <?php if($dskIndex_sum->out_slm_network != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_slm_network')}}" target="_blank">{{$dskIndex_sum->out_slm_network}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_slm_network')}}" target="_blank">{{$dskIndex_sum->out_slm_network}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_slm_network}}</td>
                                 <?php } ?>
 
                                 {{--37 out_slm_host_sum--}}
                                 <?php if($dskIndex_sum->out_slm_host != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_slm_host')}}" target="_blank">{{$dskIndex_sum->out_slm_host}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_slm_host')}}" target="_blank">{{$dskIndex_sum->out_slm_host}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_slm_host}}</td>
                                 <?php } ?>
 
                                 {{--37 out_slm_electrical_sum--}}
                                 <?php if($dskIndex_sum->out_slm_electrical != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_slm_electrical')}}" target="_blank">{{$dskIndex_sum->out_slm_electrical}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_slm_electrical')}}" target="_blank">{{$dskIndex_sum->out_slm_electrical}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_slm_electrical}}</td>
                                 <?php } ?>
 
                                 {{--37 out_slm_vandalism_sum--}}
                                 <?php if($dskIndex_sum->out_slm_vandalism != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_slm_vandalism')}}" target="_blank">{{$dskIndex_sum->out_slm_vandalism}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_slm_vandalism')}}" target="_blank">{{$dskIndex_sum->out_slm_vandalism}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_slm_vandalism}}</td>
                                 <?php } ?>
 
                                 {{--37 out_slm_force_sum--}}
                                 <?php if($dskIndex_sum->out_slm_force != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_slm_force')}}" target="_blank">{{$dskIndex_sum->out_slm_force}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_slm_force')}}" target="_blank">{{$dskIndex_sum->out_slm_force}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_slm_force}}</td>
                                 <?php } ?>
 
                                 {{--37 out_slm_implement_sum--}}
                                 <?php if($dskIndex_sum->out_slm_implement != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_slm_implement')}}" target="_blank">{{$dskIndex_sum->out_slm_implement}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_slm_implement')}}" target="_blank">{{$dskIndex_sum->out_slm_implement}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_slm_implement}}</td>
                                 <?php } ?>
 
                                 {{--37 out_slm_location_sum--}}
                                 <?php if($dskIndex_sum->out_slm_location != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_slm_location')}}" target="_blank">{{$dskIndex_sum->out_slm_location}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_slm_location')}}" target="_blank">{{$dskIndex_sum->out_slm_location}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_slm_location}}</td>
                                 <?php } ?>
 
                                 {{--37 out_slm_nontech_sum--}}
                                 <?php if($dskIndex_sum->out_slm_nontech != 0) { ?>
-                                <td><a class="text-danger" id="tiket_style" href="{{url('/admin/DailyStatusKanwil/detail_tiket_index_sum/out_slm_nontech')}}" target="_blank">{{$dskIndex_sum->out_slm_nontech}}</a></td>
+                                <td><a class="text-danger" id="tiket_style" href="{{url('/dailyStatusKanwil/dskIndexDetailSum/out_slm_nontech')}}" target="_blank">{{$dskIndex_sum->out_slm_nontech}}</a></td>
                                 <?php } else { ?>
                                 <td>{{$dskIndex_sum->out_slm_nontech}}</td>
                                 <?php } ?>
