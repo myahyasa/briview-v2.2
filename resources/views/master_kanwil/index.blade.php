@@ -27,6 +27,15 @@
                 </div>
                 @endif
 
+                @if(Session::has('warning'))
+                <div class="alert alert-warning">
+                    {{ Session::get('warning') }}
+                    @php
+                    Session::forget('warning');
+                    @endphp
+                </div>
+                @endif
+
                 <table class="table table-striped mb-4" id="masterKanwil-table">
                     <thead>
                         <tr>

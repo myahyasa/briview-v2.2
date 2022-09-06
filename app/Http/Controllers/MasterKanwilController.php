@@ -159,6 +159,31 @@ class MasterKanwilController extends Controller
             
         ]);
 
+        // cek id berdasarkan referenced id
+        $cekNewIdBerdasarkanReferencedId = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'get-new-id-in-referenced-id',
+                'table' => 'tb_master_vendor',
+                'referencedId' => $id,
+            ],
+            
+        ]); 
+        $GetNewIdInReferencedId = json_decode($cekNewIdBerdasarkanReferencedId->getBody())->result->data;
+
+        // update tb_master_kanwil_id di master lokasi crm
+        $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'update-master-foreign-key',
+                'table' => 'tb_master_lokasi_crm', 
+                'referencedId' => $id,
+                'field' => 'tb_master_kanwil_id',
+                'tb_master_kanwil_id' => $GetNewIdInReferencedId->id,
+            ],
+            
+        ]); 
+
         return redirect()->route('masterKanwil.index')->with('success', 'Master kanwil berhasil diupdate');
 
     }
@@ -167,9 +192,24 @@ class MasterKanwilController extends Controller
 
         $client = new Client();
          
-         $expire_date= date("Y-m-d");
+        $expire_date= date("Y-m-d");
 
-        $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+        $cekRelationMasterLokasiCrm = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'check-relation',
+                'table' => 'tb_master_kanwil',
+                'id' => $id,
+                'relation' => 'tb_master_lokasi_crm',
+            ],
+            
+        ]); 
+        $GetCekRelationMasterLokasiCrm = json_decode($cekRelationMasterLokasiCrm->getBody())->result->data;
+
+        // dd(count($GetCekRelationMasterLokasiCrm));
+
+        if (count($GetCekRelationMasterLokasiCrm) === 0) {
+            $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
             
              'form_params' => [
                 'comment' => 'update-master',
@@ -183,6 +223,11 @@ class MasterKanwilController extends Controller
         ]);
 
         return redirect()->route('masterKanwil.index')->with('success', 'Master kanwil berhasil dihapus');
+        } else {
+            return redirect()->route('masterKanwil.index')->with('warning', 'Data master kanwil tidak dapat dihapus karena berelasi');
+        }
+        
+        
 
     }
     

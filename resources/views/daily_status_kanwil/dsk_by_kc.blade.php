@@ -87,7 +87,7 @@
                                 {{-- reliability & pencapaian --}}
                                 <?php $this_reliability = (number_format(($item->reliability*100),2).'%');
 
-                                if($this_reliability < 90) { ?>
+                                if($this_reliability <= 90) { ?>
                                 <td style="background-color: #FF3131"><?php $this_reliability = (number_format(($item->reliability*100),2).'%'); echo($this_reliability); ?></td>
                                 <td style="background-color: #FF3131">
                                     <?php 
@@ -96,9 +96,18 @@
                                     ?>
                                 </td>
 
-                                <?php } elseif($this_reliability < 95 ) { ?>
+                                <?php } elseif($this_reliability <= 95.50 ) { ?>
                                 <td style="background-color: 	#FFFF00"><?php $this_reliability = (number_format(($item->reliability*100),2).'%'); echo($this_reliability); ?></td>
                                 <td style="background-color: 	#FFFF00">
+                                    <?php 
+                                    $pencapaian = @(($this_reliability / $this_performance)*100);
+                                    echo (number_format($pencapaian,2)).'%';
+                                    ?>
+                                </td>
+
+                                <?php } elseif($this_reliability <= 98.00 ) { ?>
+                                <td style="background-color: 	#AAFF00"><?php $this_reliability = (number_format(($item->reliability*100),2).'%'); echo($this_reliability); ?></td>
+                                <td style="background-color: 	#AAFF00">
                                     <?php 
                                     $pencapaian = @(($this_reliability / $this_performance)*100);
                                     echo (number_format($pencapaian,2)).'%';

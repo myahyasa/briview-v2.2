@@ -132,6 +132,9 @@ class MasterVendorController extends Controller
 
     }
 
+    // ambil jml relasi vendor dan machineInfo dimana idnya = id vendor sebelum diupdate
+    // ambil id machine info yg berelasi
+    // lalu update tb_master_vendor_id dengan maxId yang ada di tb_master_vendor
     public function update(Request $request, $id) {
 
         $request->validate(
@@ -159,7 +162,7 @@ class MasterVendorController extends Controller
 
         $response1 = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
             
-             'form_params' => [
+            'form_params' => [
                 'comment' => 'update-master',
                 'table' => 'tb_master_vendor',
                 'id' => $id,
@@ -179,12 +182,181 @@ class MasterVendorController extends Controller
                 'vendor_name' => $request->vendor_name,
                 'service' => $request->service,
                 'effective_date' => $request->effective_date,
+                'referenced_id' => $id,
                 'remarks' => $request->remarks,
             ],
             
         ]); 
-        
+
+        // cek id berdasarkan referenced id
+        $cekNewIdBerdasarkanReferencedId = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'get-new-id-in-referenced-id',
+                'table' => 'tb_master_vendor',
+                'referencedId' => $id,
+            ],
+            
+        ]); 
+        $GetNewIdInReferencedId = json_decode($cekNewIdBerdasarkanReferencedId->getBody())->result->data; 
+
+        // update tb_master_vendor_id di machine info
+        $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'update-master-foreign-key',
+                'table' => 'tb_machine_info', 
+                'referencedId' => $id,
+                'field' => 'tb_master_vendor_id',
+                'tb_master_vendor_id' => $GetNewIdInReferencedId->id,
+            ],
+            
+        ]); 
+
+        // update tb_master_vendor_id di digital signage
+        $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'update-master-foreign-key',
+                'table' => 'tb_digital_signage', 
+                'referencedId' => $id,
+                'field' => 'tb_master_vendor_id',
+                'tb_master_vendor_id' => $GetNewIdInReferencedId->id,
+            ],
+            
+        ]); 
+
+        // update tb_master_vendor_id di cctv
+        $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'update-master-foreign-key',
+                'table' => 'tb_cctv', 
+                'referencedId' => $id,
+                'field' => 'tb_master_vendor_id',
+                'tb_master_vendor_id' => $GetNewIdInReferencedId->id,
+            ],
+            
+        ]); 
+
+        // update tb_master_vendor_id di ups
+        $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'update-master-foreign-key',
+                'table' => 'tb_ups', 
+                'referencedId' => $id,
+                'field' => 'tb_master_vendor_id',
+                'tb_master_vendor_id' => $GetNewIdInReferencedId->id,
+            ],
+            
+        ]); 
+
+        // update tb_master_vendor_id di nvr
+        $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'update-master-foreign-key',
+                'table' => 'tb_nvr', 
+                'referencedId' => $id,
+                'field' => 'tb_master_vendor_id',
+                'tb_master_vendor_id' => $GetNewIdInReferencedId->id,
+            ],
+            
+        ]); 
+
+        // update tb_master_vendor_id di cro allocation
+        $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'update-master-foreign-key',
+                'table' => 'tb_cro_allocation', 
+                'referencedId' => $id,
+                'field' => 'tb_master_vendor_id',
+                'tb_master_vendor_id' => $GetNewIdInReferencedId->id,
+            ],
+            
+        ]); 
+
+        // update tb_master_vendor_id di master service point
+        $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'update-master-foreign-key',
+                'table' => 'tb_master_service_point', 
+                'referencedId' => $id,
+                'field' => 'tb_master_vendor_id',
+                'tb_master_vendor_id' => $GetNewIdInReferencedId->id,
+            ],
+            
+        ]); 
+
+
+
         return redirect()->route('masterVendor.index')->with('success', 'Master vendor berhasil diupdate');
+
+        // // // cek relasi dengan machine info
+        // $cekRelasiMachineInfo = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+        //      'form_params' => [
+        //         'comment' => 'check-relation-update',
+        //         'table' => 'tb_master_vendor',
+        //         'relation' => 'tb_machine_info',
+        //         'id' => $id,
+        //     ],
+            
+        // ]); 
+        // $FindRelationMasterVendorWithMachineInfo = json_decode($cekRelasiMachineInfo->getBody())->result->data;
+
+        // // cek relasi dengan digital signage
+        // $cekRelasiDigitalSignage = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+        //      'form_params' => [
+        //         'comment' => 'check-relation-update',
+        //         'table' => 'tb_master_vendor',
+        //         'relation' => 'tb_digital_signage',
+        //         'id' => $id,
+        //     ],
+            
+        // ]); 
+        // $FindRelationMasterVendorWithDigitalSignage = json_decode($cekRelasiDigitalSignage->getBody())->result->data;
+
+
+        
+        // // update tb_master_vendor_id di machine info
+        // for ($i=0; $i < sizeof($FindRelationMasterVendorWithMachineInfo); $i++){
+
+        //     $IdMachineInfo = $FindRelationMasterVendorWithMachineInfo[$i]->id_b;
+
+        //     $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+        //      'form_params' => [
+        //         'comment' => 'update-master',
+        //         'table' => 'tb_machine_info',
+        //         'id' => $IdMachineInfo,
+        //         'tb_master_vendor_id' => $GetNewIdInReferencedId->id,
+        //     ],
+
+        //     ]); 
+        // }
+        
+        // // update tb_master_vendor_id di digital signage
+        // for ($i=0; $i < sizeof($FindRelationMasterVendorWithDigitalSignage); $i++){
+
+        //     $IdDigitalSignage = $FindRelationMasterVendorWithDigitalSignage[$i]->id_b;
+
+        //     $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+        //      'form_params' => [
+        //         'comment' => 'update-master',
+        //         'table' => 'tb_digital_signage',
+        //         'id' => $IdDigitalSignage,
+        //         'tb_master_vendor_id' => $GetNewIdInReferencedId->id,
+        //     ],
+
+        //     ]); 
+        // }
+        
 
     }
 
@@ -192,9 +364,116 @@ class MasterVendorController extends Controller
 
         $client = new Client();
          
-         $expire_date= date("Y-m-d");
+        $expire_date= date("Y-m-d");
 
-        $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+        $cekRelationMachineInfo = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'check-relation',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'relation' => 'tb_machine_info',
+            ],
+            
+        ]); 
+        $GetCekRelationMachineInfo = json_decode($cekRelationMachineInfo->getBody())->result->data; 
+
+        $cekRelationDigitalSignage = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'check-relation',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'relation' => 'tb_digital_signage',
+            ],
+            
+        ]); 
+        $GetCekRelationDigitalSignage = json_decode($cekRelationDigitalSignage->getBody())->result->data; 
+
+        $cekRelationCctv = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'check-relation',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'relation' => 'tb_cctv',
+            ],
+            
+        ]); 
+        $GetCekRelationCctv = json_decode($cekRelationCctv->getBody())->result->data; 
+
+        $cekRelationUps = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'check-relation',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'relation' => 'tb_ups',
+            ],
+            
+        ]); 
+        $GetCekRelationUps = json_decode($cekRelationUps->getBody())->result->data; 
+
+        $cekRelationNvr = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'check-relation',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'relation' => 'tb_nvr',
+            ],
+            
+        ]); 
+        $GetCekRelationNvr = json_decode($cekRelationNvr->getBody())->result->data; 
+
+        $cekRelationCroAllocation = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'check-relation',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'relation' => 'tb_cro_allocation',
+            ],
+            
+        ]); 
+        $GetCekRelationCroAllocation = json_decode($cekRelationCroAllocation->getBody())->result->data; 
+        
+        $cekRelationMasterServicePoint = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+            'form_params' => [
+                'comment' => 'check-relation',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'relation' => 'tb_master_service_point',
+            ],
+            
+        ]); 
+        $GetCekRelationMasterServicePoint = json_decode($cekRelationMasterServicePoint->getBody())->result->data; 
+
+        // dd(count($GetCekRelationMasterServicePoint));
+
+        // jika tidak ada relasi maka hapus, jika berelasi jgn
+        // if (count($GetCekRelationMachineInfo) === 0 && count($GetCekRelationDigitalSignage) === 0 && count($GetCekRelationCctv) === 0 && count($GetCekRelationUps) === 0 && count($GetCekRelationNvr) === 0 && count($GetCekRelationCroAllocation) === 0 && count($GetCekRelationMasterServicePoint)) {
+        //     $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+        //      'form_params' => [
+        //         'comment' => 'update-master',
+        //         'table' => 'tb_master_vendor',
+        //         'id' => $id,
+        //         'is_deleted' => 1,
+        //         'expire_date' => $expire_date
+
+        //     ],
+            
+        //     ]); 
+        
+        //     return redirect()->route('masterVendor.index')->with('success', 'Master vendor berhasil dihapus');
+        // } else {
+        //     return redirect()->route('masterVendor.index')->with('warning', 'Data Master vendor tidak dapat dihapus karena berelasi');
+        // }
+
+        if (count($GetCekRelationMachineInfo) === 0) {
+            $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
             
              'form_params' => [
                 'comment' => 'update-master',
@@ -205,9 +484,103 @@ class MasterVendorController extends Controller
 
             ],
             
-        ]); 
+            ]); 
         
-        return redirect()->route('masterVendor.index')->with('success', 'Master vendor berhasil dihapus');
+            return redirect()->route('masterVendor.index')->with('success', 'Master vendor berhasil dihapus');
+        } else if (count($GetCekRelationDigitalSignage) === 0) {
+            $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'update-master',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'is_deleted' => 1,
+                'expire_date' => $expire_date
+
+            ],
+            
+            ]); 
+        
+            return redirect()->route('masterVendor.index')->with('success', 'Master vendor berhasil dihapus');
+        } else if (count($GetCekRelationCctv) === 0) {
+            $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'update-master',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'is_deleted' => 1,
+                'expire_date' => $expire_date
+
+            ],
+            
+            ]); 
+        
+            return redirect()->route('masterVendor.index')->with('success', 'Master vendor berhasil dihapus');
+        } else if (count($GetCekRelationUps) === 0) {
+            $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'update-master',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'is_deleted' => 1,
+                'expire_date' => $expire_date
+
+            ],
+            
+            ]); 
+        
+            return redirect()->route('masterVendor.index')->with('success', 'Master vendor berhasil dihapus');
+        } else if (count($GetCekRelationNvr) === 0) {
+            $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'update-master',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'is_deleted' => 1,
+                'expire_date' => $expire_date
+
+            ],
+            
+            ]); 
+        
+            return redirect()->route('masterVendor.index')->with('success', 'Master vendor berhasil dihapus');
+        } else if (count($GetCekRelationCroAllocation) === 0) {
+            $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'update-master',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'is_deleted' => 1,
+                'expire_date' => $expire_date
+
+            ],
+            
+            ]); 
+        
+            return redirect()->route('masterVendor.index')->with('success', 'Master vendor berhasil dihapus');
+        } else if (count($GetCekRelationMasterServicePoint) === 0) {
+            $response = $client->request('POST', 'http://localhost:3232/api/briview-endpoint', [
+            
+             'form_params' => [
+                'comment' => 'update-master',
+                'table' => 'tb_master_vendor',
+                'id' => $id,
+                'is_deleted' => 1,
+                'expire_date' => $expire_date
+
+            ],
+            
+            ]); 
+        
+            return redirect()->route('masterVendor.index')->with('success', 'Master vendor berhasil dihapus');
+        } else {
+            return redirect()->route('masterVendor.index')->with('warning', 'Data Master vendor tidak dapat dihapus karena berelasi');
+        }
+        
 
     }
     
